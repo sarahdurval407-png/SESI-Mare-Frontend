@@ -1,158 +1,197 @@
 import { useState } from "react";
 import logo from "../assets/logo.png";
 import {
-    Mic2,
-    Headphones,
-    Piano,
-    Guitar,
-    Music2,
-    CircleSlash2,
-    Heart,
-    CircleDot,
-    Target,
-    Star,
-    ArrowRight,
-    type LucideIcon,
+  Mic2,
+  Headphones,
+  Piano,
+  Guitar,
+  Music2,
+  CircleSlash2,
+  Heart,
+  CircleDot,
+  Target,
+  Star,
+  ArrowRight,
+  Check,
+  Search,
+  type LucideIcon,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Genre {
-    id: string;
-    label: string;
-    icon: LucideIcon;
+  id: string;
+  label: string;
+  icon: LucideIcon;
 }
 
 const GENRES: Genre[] = [
-    { id: "pop", label: "Pop", icon: Mic2 },
-    { id: "rap", label: "Rap", icon: Headphones },
-    { id: "hip-hop", label: "Hip Hop", icon: Piano },
-    { id: "rock", label: "Rock", icon: Guitar },
-    { id: "sertanejo", label: "Sertanejo", icon: Music2 },
-    { id: "pagode", label: "Pagode", icon: CircleSlash2 },
-    { id: "gospel", label: "Gospel", icon: Heart },
-    { id: "jazz", label: "Jazz", icon: CircleDot },
-    { id: "mpb", label: "MPB", icon: Target },
-    { id: "k-pop", label: "K-pop", icon: Star },
+  { id: "pop", label: "Pop", icon: Mic2 },
+  { id: "rap", label: "Rap", icon: Headphones },
+  { id: "hip-hop", label: "Hip Hop", icon: Piano },
+  { id: "rock", label: "Rock", icon: Guitar },
+  { id: "sertanejo", label: "Sertanejo", icon: Music2 },
+  { id: "pagode", label: "Pagode", icon: CircleSlash2 },
+  { id: "gospel", label: "Gospel", icon: Heart },
+  { id: "jazz", label: "Jazz", icon: CircleDot },
+  { id: "mpb", label: "MPB", icon: Target },
+  { id: "k-pop", label: "K-pop", icon: Star },
 ];
 
-const TOTAL_STEPS = 3;
-const CURRENT_STEP = 1;
+const PASSO_ATUAL = 1;
+const TOTAL_PASSOS = 2;
 
 export default function VibeSelectionPage() {
-    const [selected, setSelected] = useState<Set<string>>(
-        new Set(["pop", "hip-hop", "pagode", "mpb"])
-    );
+  const navigate = useNavigate();
+  const [busca, setBusca] = useState("");
+  const [selecionados, setSelecionados] = useState<Set<string>>(
+    new Set(["pop", "hip-hop", "pagode", "mpb"])
+  );
 
-    function toggleGenre(id: string) {
-        setSelected((prev) => {
-            const next = new Set(prev);
-            if (next.has(id)) {
-                next.delete(id);
-            } else {
-                next.add(id);
-            }
-            return next;
-        });
-    }
+  const generosFiltrados = GENRES.filter((genero) =>
+    genero.label.toLowerCase().includes(busca.toLowerCase())
+  );
 
-    const progressPercent = (CURRENT_STEP / TOTAL_STEPS) * 100;
+  function alternarGenero(id: string) {
+    setSelecionados((atual) => {
+      const proximo = new Set(atual);
+      if (proximo.has(id)) {
+        proximo.delete(id);
+      } else {
+        proximo.add(id);
+      }
+      return proximo;
+    });
+  }
 
-    return (
-        <div className="min-h-screen w-full bg-[#0a0e1a] text-white flex items-center justify-center px-6 py-16">
-            <div className="w-full max-w-4xl">
-                {/* Cabeçalho */}
-                <header className="flex flex-col items-center text-center gap-3 mb-14">
-                    <div className="flex items-center gap-2 text-3xl font-bold tracking-tight text-sky-400">
-                        {/* Logo no lugar do texto */}
-                        <img
-                            src={logo}
-                            alt="Maré"
-                            className="w-[200px] h-auto object-contain"
-                        />
-                    </div>
-                    <h1 className="text-3xl md:text-4xl font-semibold text-white">
-                        Qual a sua vibe?
-                    </h1>
-                    <p className="text-sm md:text-base text-slate-400 max-w-md">
-                        Escolha seus estilos favoritos para personalizar seu feed de descobertas.
-                    </p>
-                </header>
+  function handleAvancar() {
+    if (selecionados.size === 0) return;
+    
+    // Redireciona para a rota /artistas passando os gêneros selecionados no state
+    navigate("/artistas", {
+      state: { generosSelecionados: Array.from(selecionados) },
+    });
+  }
 
-                {/* Grade de gêneros */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-16">
-                    {GENRES.map(({ id, label, icon: Icon }) => {
-                        const isSelected = selected.has(id);
-                        return (
-                            <button
-                                key={id}
-                                type="button"
-                                onClick={() => toggleGenre(id)}
-                                aria-pressed={isSelected}
-                                className={`relative flex flex-col justify-between rounded-xl border p-4 h-28 text-left transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${isSelected
-                                    ? "bg-sky-950/60 border-sky-400"
-                                    : "bg-slate-900/60 border-slate-800 hover:border-slate-600"
-                                    }`}
-                            >
-                                <span
-                                    className={`flex h-8 w-8 items-center justify-center rounded-lg ${isSelected
-                                        ? "bg-sky-500/20 text-sky-400"
-                                        : "bg-slate-800 text-slate-300"
-                                        }`}
-                                >
-                                    <Icon size={16} />
-                                </span>
+  const progresso = (PASSO_ATUAL / TOTAL_PASSOS) * 100;
 
-                                <span className="flex items-center justify-between">
-                                    <span className="text-sm font-medium text-slate-100">
-                                        {label}
-                                    </span>
-                                    {isSelected && (
-                                        <span className="flex h-4 w-4 items-center justify-center rounded-full bg-sky-400 text-[#0a0e1a]">
-                                            <svg
-                                                viewBox="0 0 12 12"
-                                                width={9}
-                                                height={9}
-                                                fill="none"
-                                            >
-                                                <path
-                                                    d="M2 6.2 4.8 9 10 3"
-                                                    stroke="currentColor"
-                                                    strokeWidth={2}
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                />
-                                            </svg>
-                                        </span>
-                                    )}
-                                </span>
-                            </button>
-                        );
-                    })}
-                </div>
+  return (
+    <main className="min-h-screen bg-[#080d14] text-white flex flex-col items-center px-6 py-16">
+      {/* LOGO */}
+      <img
+        src={logo}
+        alt="Maré"
+        className="w-[220px] object-contain mb-8"
+      />
 
-                {/* Rodapé: progresso + avançar */}
-                <footer className="flex items-center justify-between">
-                    <div className="flex flex-col gap-2 w-40">
-                        <span className="text-xs text-slate-400">
-                            Passo {CURRENT_STEP} de {TOTAL_STEPS}
-                        </span>
-                        <div className="h-1 w-full rounded-full bg-slate-800 overflow-hidden">
-                            <div
-                                className="h-full rounded-full bg-sky-400 transition-all"
-                                style={{ width: `${progressPercent}%` }}
-                            />
-                        </div>
-                    </div>
+      {/* TÍTULO */}
+      <h1 className="font-serif text-[32px] font-bold">Qual a sua vibe?</h1>
+      <p className="text-gray-400 text-[15px] mt-2 mb-8 text-center max-w-md">
+        Escolha seus estilos favoritos para personalizar seu feed de descobertas.
+      </p>
 
-                    <button
-                        type="button"
-                        disabled={selected.size === 0}
-                        className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-500 text-white transition-colors hover:bg-sky-400 disabled:opacity-40 disabled:hover:bg-sky-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
-                        aria-label="Avançar para o próximo passo"
-                    >
-                        <ArrowRight size={20} />
-                    </button>
-                </footer>
-            </div>
+      {/* BUSCA */}
+      <div className="relative w-full max-w-[400px] mb-14">
+        <Search
+          size={18}
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+        />
+        <input
+          type="text"
+          value={busca}
+          onChange={(e) => setBusca(e.target.value)}
+          placeholder="Buscar..."
+          className="
+            w-full h-[46px]
+            bg-[#0f1622] border border-[#252d38]
+            rounded-lg
+            pl-11 pr-4
+            text-[15px] text-gray-200
+            placeholder:text-gray-500
+            outline-none
+            focus:border-blue-400
+            transition
+          "
+        />
+      </div>
+
+      {/* GRID DE GÊNEROS */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 max-w-[900px] w-full">
+        {generosFiltrados.map(({ id, label, icon: Icon }) => {
+          const selecionado = selecionados.has(id);
+
+          return (
+            <button
+              key={id}
+              type="button"
+              onClick={() => alternarGenero(id)}
+              aria-pressed={selecionado}
+              className={`
+                relative flex flex-col items-center gap-3
+                p-5 rounded-lg border
+                transition cursor-pointer
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400
+                ${selecionado
+                  ? "border-blue-400 bg-blue-400/5"
+                  : "border-[#252d38] hover:border-gray-500"}
+              `}
+            >
+              <span
+                className={`
+                  w-[70px] h-[70px] rounded-full
+                  flex items-center justify-center
+                  ${selecionado
+                    ? "bg-blue-400/10 text-blue-400"
+                    : "bg-[#151c28] text-gray-400"}
+                `}
+              >
+                <Icon size={26} />
+              </span>
+
+              <span className="flex items-center gap-1.5 text-[14px] font-serif">
+                {label}
+                {selecionado && (
+                  <span className="w-[16px] h-[16px] rounded-full bg-blue-400 flex items-center justify-center">
+                    <Check size={10} strokeWidth={3} className="text-[#080d14]" />
+                  </span>
+                )}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* RODAPÉ: PASSO + AVANÇAR */}
+      <div className="w-full max-w-[900px] flex items-center justify-between mt-16">
+        <div>
+          <p className="text-gray-400 text-[13px] mb-1">
+            Passo {PASSO_ATUAL} de {TOTAL_PASSOS}
+          </p>
+          <div className="w-[140px] h-[2px] bg-[#252d38] rounded-full overflow-hidden">
+            <div
+              className="h-full bg-blue-400 transition-all duration-300"
+              style={{ width: `${progresso}%` }}
+            />
+          </div>
         </div>
-    );
+
+        <button
+          type="button"
+          onClick={handleAvancar}
+          disabled={selecionados.size === 0}
+          aria-label="Avançar para a página de artistas"
+          className="
+            w-[48px] h-[48px]
+            rounded-full
+            bg-blue-400
+            flex items-center justify-center
+            transition cursor-pointer
+            hover:bg-blue-500
+            disabled:opacity-40 disabled:cursor-not-allowed
+          "
+        >
+          <ArrowRight size={20} className="text-[#080d14]" />
+        </button>
+      </div>
+    </main>
+  );
 }
