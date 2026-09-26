@@ -27,7 +27,7 @@ export default function Sidebar() {
     }
 
     return (
-        <aside className="w-85 h-screen bg-[#151824] border-r-2 border-[#445264] text-white flex flex-col justify-between fixed" style={{ fontFamily: "Inter, sans-serif", fontWeight: 300 }}>
+        <aside className="w-85 h-screen bg-[#111420] border-r-2 border-[#354052] text-white flex flex-col justify-between fixed top-0 left-0" style={{ fontFamily: "Inter, sans-serif", fontWeight: 300 }}>
 
             {/* TOPO */}
             <div>
@@ -94,7 +94,7 @@ export default function Sidebar() {
       font-medium
     "
                     >
-                        Postar
+                        Post
                     </button>
                 </div>
             </div>
