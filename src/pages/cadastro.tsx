@@ -115,7 +115,7 @@ function Cadastro() {
         overflow-hidden
         px-6
         lg:px-20
-        bg-[#080D14]
+        bg-[#080A10]
     "
       style={{
         fontFamily: "Inter, sans-serif",
@@ -178,7 +178,7 @@ function Cadastro() {
         bg-[#111A25]/95
         backdrop-blur-md
         border
-        border-[#26384D]
+        border-[#354052]
         rounded-2xl
         shadow-2xl
         px-8
@@ -246,9 +246,9 @@ function Cadastro() {
                                     px-4
                                     py-3
                                     rounded-lg
-                                    bg-[#080D14]
+                                    bg-[#080A10]
                                     border
-                                    border-[#445264]
+                                    border-[#354052]
                                     text-[#E4EFFF]
                                     placeholder-[#68788C]
                                     outline-none
@@ -290,9 +290,9 @@ function Cadastro() {
                                     px-4
                                     py-3
                                     rounded-lg
-                                    bg-[#080D14]
+                                    bg-[#080A10]
                                     border
-                                    border-[#445264]
+                                    border-[#354052]
                                     text-[#E4EFFF]
                                     placeholder-[#68788C]
                                     outline-none
@@ -341,9 +341,9 @@ function Cadastro() {
                                         py-3
                                         pr-12
                                         rounded-lg
-                                        bg-[#080D14]
+                                        bg-[#080A10]
                                         border
-                                        border-[#445264]
+                                        border-[#354052]
                                         text-[#E4EFFF]
                                         placeholder-[#68788C]
                                         outline-none
@@ -426,9 +426,9 @@ function Cadastro() {
                                         py-3
                                         pr-12
                                         rounded-lg
-                                        bg-[#080D14]
+                                        bg-[#080A10]
                                         border
-                                        border-[#445264]
+                                        border-[#354052]
                                         text-[#E4EFFF]
                                         placeholder-[#68788C]
                                         outline-none
@@ -517,7 +517,7 @@ function Cadastro() {
                                 h-12
                                 bg-[#58AAF0]
                                 hover:bg-[#3F95D8]
-                                text-[#080D14]
+                                text-[#080A10]
                                 font-semibold
                                 rounded-lg
                                 transition

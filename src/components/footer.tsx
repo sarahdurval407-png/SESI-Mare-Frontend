@@ -2,7 +2,7 @@
 export default function Footer() {
     return (
 
-        <footer className="bg-[#080D14] text-white px-12 py-24">
+        <footer className="bg-[#080A10] text-white px-12 py-24">
 
             <div className="flex items-start justify-center gap-20 text-center">
 

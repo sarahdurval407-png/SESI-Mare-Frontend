@@ -9,10 +9,10 @@ export default function RecommendedMusic({
 }: RecommendedMusicProps) {
 
     return (
-        <div className="w-full border border-[#354052] bg-[#111722] rounded-lg p-3 flex items-center gap-3">
+        <div className="w-full border border-[#354052] bg-[#111420] rounded-lg p-3 flex items-center gap-3">
 
             {/* Capa */}
-            <div className="w-12 h-12 rounded-md bg-[#697386] shrink-0" />
+            <div className="w-14 h-14 rounded-lg bg-[#697386] shrink-0" />
 
             {/* Informações */}
             <div className="min-w-0 flex-1">

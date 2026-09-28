@@ -3,7 +3,7 @@ import { Search } from "lucide-react"
 export default function SearchBar() {
     return (
         <div className="w-full max-w-[600px]">
-            <div className="flex items-center gap-3 bg-[#111827] border border-[#172235] rounded-lg px-4 h-10">
+            <div className="flex items-center gap-3 bg-[#111420] border border-[#354052] rounded-lg px-4 h-10">
 
                 <Search
                     size={16}

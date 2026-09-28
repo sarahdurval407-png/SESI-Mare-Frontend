@@ -75,7 +75,7 @@ export default function VibeSelectionPage() {
   const progresso = (PASSO_ATUAL / TOTAL_PASSOS) * 100;
 
   return (
-    <main className="min-h-screen bg-[#080d14] text-white flex flex-col items-center px-6 py-16">
+    <main className="min-h-screen bg-[#080A10] text-white flex flex-col items-center px-6 py-16">
       {/* LOGO */}
       <img
         src={logo}

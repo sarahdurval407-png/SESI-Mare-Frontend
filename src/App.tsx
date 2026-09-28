@@ -8,7 +8,7 @@ import Perfil from "./pages/perfil";
 import Acessibilidade from "./pages/acessibilidade";
 import Artistas from "./pages/artistas";
 import Explorar from "./pages/explorar";
-import Salva from "./pages/salva";
+import Salvos from "./pages/salvos";
 import Criarpost from "./pages/criarpost";
 import Contato from "./pages/contato";
 import { Toaster } from "react-hot-toast";
@@ -36,7 +36,7 @@ function App() {
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/acessibilidade" element={<Acessibilidade />} />
         <Route path="/artistas" element={<Artistas />} />
-        <Route path="/salva" element={<Salva />} />
+        <Route path="/salvos" element={<Salvos />} />
         <Route path="/criarpost" element={<Criarpost />} />
 
       </Routes>

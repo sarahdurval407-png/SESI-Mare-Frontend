@@ -25,7 +25,7 @@ function Contato() {
             lg:px-24
             py-16
             overflow-hidden
-             bg-[#080D14]
+             bg-[#080A10]
              "
             >
 

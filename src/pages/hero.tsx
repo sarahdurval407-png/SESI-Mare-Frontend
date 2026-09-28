@@ -40,7 +40,7 @@ function Home() {
       <div
         className="
           relative
-          bg-[#080D14]
+          bg-[#080A10]
           text-white
           h-[100vh]
           flex

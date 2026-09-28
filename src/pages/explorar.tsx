@@ -1,18 +1,17 @@
-import SearchBar from "../components/searchbar"
-import PostCard from "../components/postCard"
-import RecommendedMusic from "../components/recommendedMusic"
-import Sidebar from "../components/sidebar"
+import SearchBar from "../components/searchbar";
+import Sidebar from "../components/sidebar";
+import MusicCard from "../components/musicCard";
 
-export default function Home() {
+import { TrendUpIcon, StarIcon, SparkleIcon } from "@phosphor-icons/react";
+
+export default function Explorar() {
   return (
-    <div className="min-h-screen bg-[#080D14]">
-
+    <div className="min-h-screen bg-[#080A10] overflow-x-hidden">
       {/* Sidebar */}
       <Sidebar />
 
       {/* Conteúdo central */}
       <main className="min-h-screen px-4 sm:px-6 lg:px-8">
-
         {/* Barra de pesquisa */}
         <header className="h-20 flex items-center justify-center">
           <SearchBar />
@@ -20,93 +19,85 @@ export default function Home() {
 
         {/* Conteúdo */}
         <div className="relative">
+          {/* CONTEÚDO DA EXPLORAÇÃO */}
+          <section className="w-full max-w-[1000px] mx-auto">
+            {/* Título */}
+            <div className="mb-8">
+              <h1 className="text-2xl text-white">Explorar</h1>
 
-          {/* POSTS */}
-          <section className="w-full max-w-[600px] mx-auto">
-
-            {/* Tabs */}
-            <div className="flex items-center justify-center gap-10 mb-5 px-2">
-              <button className="text-lg text-white border-b-2 border-[#58a9e8] pb-2">
-                Para você
-              </button>
-
-              <button className="text-lg text-[#697386] pb-2">
-                Seguindo
-              </button>
+              <p className="text-sm text-[#697386] mt-1">
+                Descubra novas músicas, artistas e posts.
+              </p>
             </div>
 
-            {/* Posts */}
-            <div className="flex flex-col gap-6 py-4">
+            {/* =========================
+                EM ALTA
+            ========================= */}
 
-              <PostCard
-                username="Jurema"
-                time="2 minutos"
-                content="Essa música me transporta para outro universo toda vez que escuto. O trabalho de arranjo nos metais aqui é simplesmente fantástico!"
-                musicTitle="Marejada"
-                artist="Orquestra do Atlântico"
-                likes={18}
-                comments={9}
-              />
+            <section className="mb-10">
+              <div className="flex items-center gap-2 mb-5">
+                <TrendUpIcon size={18} className="text-[#58a9e8]" />
 
-              <PostCard
-                username="Carlos_F"
-                time="12 minutos"
-                content="Alguém mais acionou para o lançamento do novo álbum na próxima semana? Os singles lançados até agora mostram uma maturidade sonora incrível."
-                musicTitle="Horizonte Sombrio"
-                artist="Lumina Noir"
-                likes={22}
-                comments={14}
-              />
+                <h2 className="text-lg text-white">Em alta</h2>
+              </div>
 
-              <PostCard
-                username="Ana_Musica"
-                time="27 minutos"
-                content="Simplesmente impecável. A produção vocal e a dinâmica de sintetizadores analógicos criam uma atmosfera sensacional."
-                musicTitle="Retro Frequência"
-                artist="Vapor Wave"
-                likes={24}
-                comments={11}
-              />
+              <div className="flex gap-4 overflow-x-auto pb-2">
+                <MusicCard
+                  tipo="banner"
+                  titulo="Nome da música"
+                  artista="Nome do artista"
+                  nota={4.8}
+                  avaliacoes="124 avaliações"
+                />
+              </div>
+            </section>
 
-            </div>
+            {/* =========================
+                MAIS BEM AVALIADAS
+            ========================= */}
+
+            <section className="mb-10">
+              <div className="flex items-center gap-2 mb-5">
+                <StarIcon size={18} className="text-[#58a9e8]" />
+
+                <h2 className="text-lg text-white">Mais bem avaliadas</h2>
+              </div>
+
+              <div className="flex gap-4 overflow-x-auto pb-2">
+                <MusicCard
+                  tipo="quadrado"
+                  titulo="Nome da música"
+                  artista="Nome do artista"
+                  nota={5}
+                  avaliacoes="328 avaliações"
+                />
+              </div>
+            </section>
+
+            {/* =========================
+                RECOMENDADAS
+            ========================= */}
+
+            <section className="mb-10">
+              <div className="flex items-center gap-2 mb-5">
+                <SparkleIcon size={18} className="text-[#58a9e8]" />
+
+                <h2 className="text-lg text-white">Recomendadas para você</h2>
+              </div>
+
+              <div className="flex gap-4 overflow-x-auto pb-2">
+                <MusicCard
+                  tipo="quadrado"
+                  titulo="Nome da música"
+                  artista="Nome do artista"
+                  nota={4.7}
+                  avaliacoes="96 avaliações"
+                />
+              </div>
+            </section>
           </section>
-
-
-          {/* RECOMENDAÇÕES */}
-          <aside
-            className="
-        hidden
-        lg:block
-        absolute
-        top-0
-        left-[calc(50%+330px)]
-        w-[280px]
-        xl:w-[340px]
-      "
-          >
-
-            <h2 className="text-lg text-white mb-5">
-              Músicas recomendadas
-            </h2>
-
-            <div className="flex flex-col gap-3">
-
-              <RecommendedMusic
-                title="Lembrança"
-                artist="Ayla"
-              />
-
-              <RecommendedMusic
-                title="Super Power Girl"
-                artist="Kira"
-              />
-
-            </div>
-
-          </aside>
-
         </div>
       </main>
     </div>
-  )
+  );
 }

@@ -67,7 +67,7 @@ function Navbar() {
         w-full
         z-50
         h-[100px]
-        bg-[#080D14]
+        bg-[#080A10]
         px-8
         flex
         items-center
