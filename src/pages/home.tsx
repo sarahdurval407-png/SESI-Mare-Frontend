@@ -1,47 +1,44 @@
-import SearchBar from "../components/searchbar"
-import PostCard from "../components/postCard"
-import RecommendedMusic from "../components/recommendedMusic"
-import Sidebar from "../components/sidebar"
+import PageLayout from "../components/pageLayout";
+import PageContent from "../components/pageContent";
+import SearchBar from "../components/searchbar";
+import PostCard from "../components/postCard";
+import RecommendedMusic from "../components/recommendedMusic";
+import FeedTabs from "../components/feedTabs";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#080A10]">
+    <PageLayout>
+      <PageContent>
 
-      {/* Sidebar */}
-      <Sidebar />
+        {/* COLUNAS */}
+        <div className="grid grid-cols-1 gap-10 xl:grid-cols-[minmax(0,1fr)_340px]">
 
-      {/* Conteúdo central */}
-      <main className="min-h-screen px-4 sm:px-6 lg:px-8">
+          {/* COLUNA PRINCIPAL */}
+          <section className="min-w-0">
 
-        {/* Barra de pesquisa */}
-        <header className="h-20 flex items-center justify-center">
-          <SearchBar />
-        </header>
+            {/* ÁREA FIXA */}
+            <div className="sticky top-0 z-20 bg-[#080A10]">
 
-        {/* Conteúdo */}
-        <div className="relative">
+              {/* BUSCA */}
+              <div className="pt-6">
+                <SearchBar />
+              </div>
 
-          {/* POSTS */}
-          <section className="w-full max-w-[600px] mx-auto">
+              {/* FEED TABS */}
+              <div className="flex justify-center pb-2 pt-4">
+                <FeedTabs />
+              </div>
 
-            {/* Tabs */}
-            <div className="flex items-center justify-center gap-10 mb-5 px-2">
-              <button className="text-lg text-white border-b-2 border-[#58a9e8] pb-2">
-                Para você
-              </button>
-
-              <button className="text-lg text-[#697386] pb-2">
-                Seguindo
-              </button>
             </div>
 
-            {/* Posts */}
-            <div className="flex flex-col gap-6 py-4">
+            {/* POSTS */}
+            <div className="flex flex-col gap-6 pt-4">
 
               <PostCard
-                username="Jurema"
+                name="Jurema"
+                username="Jurema0321"
                 time="2 minutos"
-                content="Essa música me transporta para outro universo toda vez que escuto. O trabalho de arranjo nos metais aqui é simplesmente fantástico!"
+                content="Essa música me transporta para outro universo toda vez que escuto."
                 musicTitle="Marejada"
                 artist="Orquestra do Atlântico"
                 likes={18}
@@ -49,9 +46,10 @@ export default function Home() {
               />
 
               <PostCard
-                username="Carlos_F"
+                name="Carlos F"
+                username="Carlinhos"
                 time="12 minutos"
-                content="Alguém mais acionou para o lançamento do novo álbum na próxima semana? Os singles lançados até agora mostram uma maturidade sonora incrível."
+                content="Alguém mais acionou para o lançamento do novo álbum na próxima semana?"
                 musicTitle="Horizonte Sombrio"
                 artist="Lumina Noir"
                 likes={22}
@@ -59,9 +57,10 @@ export default function Home() {
               />
 
               <PostCard
-                username="Ana_Musica"
+                name="Sico"
+                username="PorquinhoMatado"
                 time="27 minutos"
-                content="Simplesmente impecável. A produção vocal e a dinâmica de sintetizadores analógicos criam uma atmosfera sensacional."
+                content="Simplesmente impecável."
                 musicTitle="Retro Frequência"
                 artist="Vapor Wave"
                 likes={24}
@@ -69,44 +68,39 @@ export default function Home() {
               />
 
             </div>
+
           </section>
 
-
           {/* RECOMENDAÇÕES */}
-          <aside
-            className="
-        hidden
-        lg:block
-        absolute
-        top-0
-        left-[calc(50%+330px)]
-        w-[280px]
-        xl:w-[340px]
-      "
-          >
+          <aside className="hidden xl:block">
 
-            <h2 className="text-lg text-white mb-5">
-              Músicas recomendadas
-            </h2>
+            <div className="sticky top-40">
 
-            <div className="flex flex-col gap-3">
+              <h2 className="mb-5 font-serif text-[16px] text-white">
+                Músicas recomendadas
+              </h2>
 
-              <RecommendedMusic
-                title="Lembrança"
-                artist="Ayla"
-              />
+              <div className="flex flex-col gap-3">
 
-              <RecommendedMusic
-                title="Super Power Girl"
-                artist="Kira"
-              />
+                <RecommendedMusic
+                  title="Lembrança"
+                  artist="Ayla"
+                />
+
+                <RecommendedMusic
+                  title="Super Power Girl"
+                  artist="Kira"
+                />
+
+              </div>
 
             </div>
 
           </aside>
 
         </div>
-      </main>
-    </div>
-  )
+
+      </PageContent>
+    </PageLayout>
+  );
 }

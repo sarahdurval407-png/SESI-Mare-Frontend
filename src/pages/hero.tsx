@@ -10,7 +10,7 @@ import qrcode from "../assets/qrcode.png"
 import { useNavigate } from "react-router-dom"
 
 
-function Home() {
+function Hero() {
 
   const navigate = useNavigate();
 
@@ -247,8 +247,8 @@ function Home() {
               src={play_store}
               alt="Google Play"
               className="
-                w-[190px]
-                h-auto
+                w-[180px]
+                h-[54px]
                 cursor-pointer
                 hover:scale-105
                 transition
@@ -302,4 +302,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Hero

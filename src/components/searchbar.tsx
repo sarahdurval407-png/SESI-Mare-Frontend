@@ -1,22 +1,17 @@
-import { Search } from "lucide-react"
+import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 
 export default function SearchBar() {
-    return (
-        <div className="w-full max-w-[600px]">
-            <div className="flex items-center gap-3 bg-[#111420] border border-[#354052] rounded-lg px-4 h-10">
+  return (
+    <div className="w-full max-w-[740px]">
+      <div className="flex h-10 w-full items-center gap-3 rounded-lg border border-[#354052] bg-[#111420] px-4">
+        <MagnifyingGlassIcon size={16} className="shrink-0 text-[#718096]" />
 
-                <Search
-                    size={16}
-                    className="text-[#718096] shrink-0"
-                />
-
-                <input
-                    type="text"
-                    placeholder="Buscar..."
-                    className="bg-transparent outline-none border-none text-xs text-white placeholder:text-[#718096] w-full"
-                />
-
-            </div>
-        </div>
-    )
+        <input
+          type="text"
+          placeholder="Buscar..."
+          className="w-full border-none bg-transparent text-xs text-white outline-none placeholder:text-[#718096]"
+        />
+      </div>
+    </div>
+  );
 }

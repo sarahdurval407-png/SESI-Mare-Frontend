@@ -2,6 +2,7 @@ import { Heart, MessageCircle } from "lucide-react";
 import MusicCard from "./musicCard";
 
 interface PostCardProps {
+  name: string;
   username: string;
   time: string;
   content: string;
@@ -14,6 +15,7 @@ interface PostCardProps {
 }
 
 export default function PostCard({
+  name,
   username,
   time,
   content,
@@ -29,7 +31,11 @@ export default function PostCard({
         <div className="w-10 h-10 rounded-full bg-[#697386]" />
 
         <div>
-          <p className="text-[14px] text-[#d4d9e2]">{username}</p>
+          <div className="flex">
+            <p className="text-[14px] text-[#d4d9e2]">{name}</p>
+
+            <p className="text-[14px] text-[#697386] ml-1">@{username}</p>
+          </div>
 
           <p className="text-[12px] text-[#697386]">há {time}</p>
         </div>
