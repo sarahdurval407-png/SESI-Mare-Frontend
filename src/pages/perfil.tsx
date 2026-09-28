@@ -56,7 +56,7 @@ export default function Perfil() {
                 <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
                   {/* AVATAR + NOME */}
                   <div className="flex items-end gap-4">
-                    <div className="-mt-12 flex h-[82px] w-[82px] shrink-0 items-center justify-center rounded-full border-4 border-[#0d121c] bg-[#1a2130]">
+                    <div className="-mt-12 z-50 flex h-[82px] w-[82px] shrink-0 items-center justify-center rounded-full border-4 border-[#0d121c] bg-[#1a2130]">
                       <UserIcon size={34} className="text-gray-400" />
                     </div>
 
