@@ -3,7 +3,7 @@ import PostCard from "../components/postCard"
 import RecommendedMusic from "../components/recommendedMusic"
 import Sidebar from "../components/sidebar"
 
-export default function Explorar() {
+export default function Home() {
   return (
     <div className="min-h-screen bg-[#080D14]">
 
