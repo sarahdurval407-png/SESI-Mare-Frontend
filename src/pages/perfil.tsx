@@ -1,189 +1,180 @@
 import {
-  BookmarkSimpleIcon,
   CameraIcon,
-  GearIcon,
-  HouseIcon,
   MusicNoteIcon,
   PencilSimpleIcon,
   ShareNetworkIcon,
-  StarIcon,
   UserIcon,
 } from "@phosphor-icons/react";
 
+import PageLayout from "../components/pageLayout";
+import PageContent from "../components/pageContent";
 import SearchBar from "../components/searchbar";
-import Sidebar from "../components/sidebar";
 import PostCard from "../components/postCard";
 import RecommendedMusic from "../components/recommendedMusic";
 
 export default function Perfil() {
   return (
-    <div className="min-h-screen bg-[#080A10] text-white">
-      <div className="flex min-h-screen">
-        {/* SIDEBAR */}
-        <Sidebar />
+    <PageLayout>
+      <PageContent>
+        {/* COLUNAS */}
+        <div className="grid grid-cols-1 gap-10 xl:grid-cols-[minmax(0,1fr)_340px]">
+          {/* COLUNA PRINCIPAL */}
+          <section className="min-w-0">
+            {/* ÁREA FIXA */}
+            <div className="sticky top-0 z-20 bg-[#080A10]">
+              <div className="w-full max-w-[800px] pt-6 pb-6">
+                <SearchBar />
+              </div>
+            </div>
 
-        {/* CONTEÚDO */}
+            {/* TÍTULO */}
+            <div className="mb-6">
+              <h1 className="font-serif text-[26px] text-gray-100">
+                Perfil
+              </h1>
 
-        <main className="ml-85 min-h-screen min-w-0 px-6 py-6 lg:px-10">
-          <div className="mx-auto w-full max-w-[1500px]">
-            <div className="grid min-w-0 grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
-              {/* COLUNA PRINCIPAL */}
-              <div className="min-w-0">
-                {/* BUSCA */}
-                <div className="flex justify-center">
-                  <SearchBar />
-                </div>
+              <p className="mt-1 font-serif text-[13px] text-[#697386]">
+                Suas músicas e publicações
+              </p>
+            </div>
 
-                {/* TÍTULO */}
-                <div className="mt-8">
-                  <h1 className="font-serif text-[26px] text-gray-100">
-                    Perfil
-                  </h1>
-                </div>
-
-                {/* PERFIL */}
-                <section className="mx-auto mt-6 max-w-[1100px] overflow-hidden rounded-xl border border-[#252d38] bg-[#0d121c]">
-                  {/* CAPA */}
-                  <div className="relative h-[140px] bg-[#141a28]">
-                    <button
-                      type="button"
-                      className="absolute right-4 top-4 flex items-center gap-2 rounded-lg bg-[#111726]/80 px-3 py-2 font-serif text-[11px] text-gray-300 transition hover:text-blue-400"
-                    >
-                      <CameraIcon size={16} />
-                      Alterar capa
-                    </button>
-                  </div>
-
-                  {/* INFORMAÇÕES */}
-                  <div className="px-6 pb-6">
-                    <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-                      {/* AVATAR + NOME */}
-                      <div className="flex items-end gap-4">
-                        <div className="-mt-12 flex h-[82px] w-[82px] shrink-0 items-center justify-center rounded-full border-4 border-[#0d121c] bg-[#1a2130]">
-                          <UserIcon size={34} className="text-gray-400" />
-                        </div>
-
-                        <div className="pb-1">
-                          <div className="flex">
-                            <h2 className="font-serif text-[18px] text-gray-100">
-                              Usuário
-                            </h2>
-
-                            <p className="ml-2 font-serif text-[18px] text-gray-500">
-                              @usuario
-                            </p>
-                          </div>
-
-                          <p className="mt-1 font-serif text-[12px] text-gray-500">
-                            Minha bio na Maré
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* AÇÕES */}
-                      <div className="flex items-center gap-3">
-                        <button
-                          type="button"
-                          className="flex items-center gap-2 rounded-lg border border-[#252d38] px-3 py-2 font-serif text-[11px] text-gray-300 transition hover:border-blue-400 hover:text-blue-400"
-                        >
-                          <ShareNetworkIcon size={16} />
-                          Compartilhar
-                        </button>
-
-                        <button
-                          type="button"
-                          className="flex items-center gap-2 rounded-lg bg-[#5ea3ee] px-3 py-2 font-serif text-[11px] text-white transition hover:bg-[#7ab4f2]"
-                        >
-                          <PencilSimpleIcon size={16} />
-                          Editar perfil
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* SEGUIDORES */}
-                    <div className="mt-5 flex gap-6 font-serif text-[12px] text-gray-400">
-                      <span>
-                        <strong className="text-gray-200">70</strong> Seguidores
-                      </span>
-
-                      <span>
-                        <strong className="text-gray-200">87</strong> Seguindo
-                      </span>
-                    </div>
-                  </div>
-                </section>
-
-                {/* ABAS */}
-                <div className="mx-auto mt-8 max-w-[1100px] border-b border-[#252d38]">
-                  <div className="flex gap-8">
-                    <button
-                      type="button"
-                      className="border-b-2 border-blue-400 px-1 pb-3 font-serif text-[13px] text-white"
-                    >
-                      Últimas avaliações
-                    </button>
-
-                    <button
-                      type="button"
-                      className="border-b-2 border-transparent px-1 pb-3 font-serif text-[13px] text-gray-500 transition hover:text-blue-400"
-                    >
-                      Comentários
-                    </button>
-
-                    <button
-                      type="button"
-                      className="border-b-2 border-transparent px-1 pb-3 font-serif text-[13px] text-gray-500 transition hover:text-blue-400"
-                    >
-                      Músicas salvas
-                    </button>
-                  </div>
-                </div>
-
-                {/* TÍTULO DA SEÇÃO */}
-                <div className="mx-auto mt-6 max-w-[1100px]">
-                  <div className="flex items-center gap-2">
-                    <MusicNoteIcon size={18} className="text-blue-400" />
-
-                    <h2 className="font-serif text-[16px] text-gray-100">
-                      Últimas avaliações
-                    </h2>
-                  </div>
-                </div>
-
-                {/* POST */}
-                <section className="mx-auto mt-4 max-w-[1100px]">
-                  <PostCard
-                    name="Jurema"
-                    username="Jurema0321"
-                    time="2 minutos"
-                    content="Essa música me transporta para outro universo toda vez que escuto. O trabalho de arranjo nos metais aqui é simplesmente fantástico!"
-                    musicTitle="Marejada"
-                    artist="Orquestra do Atlântico"
-                    likes={18}
-                    comments={9}
-                  />
-                </section>
+            {/* PERFIL */}
+            <section className="w-full overflow-hidden rounded-xl border border-[#252d38] bg-[#0d121c]">
+              {/* CAPA */}
+              <div className="relative h-[140px] bg-[#141a28]">
+                <button
+                  type="button"
+                  className="absolute right-4 top-4 flex items-center gap-2 rounded-lg bg-[#111726]/80 px-3 py-2 font-serif text-[11px] text-gray-300 transition hover:text-blue-400"
+                >
+                  <CameraIcon size={16} />
+                  Alterar capa
+                </button>
               </div>
 
-              {/* Musicas recomendadas */}
+              {/* INFORMAÇÕES */}
+              <div className="px-6 pb-6">
+                <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+                  {/* AVATAR + NOME */}
+                  <div className="flex items-end gap-4">
+                    <div className="-mt-12 flex h-[82px] w-[82px] shrink-0 items-center justify-center rounded-full border-4 border-[#0d121c] bg-[#1a2130]">
+                      <UserIcon size={34} className="text-gray-400" />
+                    </div>
 
-              <aside className="hidden xl:block">
-                <div className="sticky top-6">
-                  <h2 className="mb-5 font-serif text-[16px] text-white">
-                    Músicas recomendadas
-                  </h2>
+                    <div className="pb-1">
+                      <div className="flex">
+                        <h2 className="font-serif text-[18px] text-gray-100">
+                          Usuário
+                        </h2>
 
-                  <div className="flex flex-col gap-3">
-                    <RecommendedMusic title="Lembrança" artist="Ayla" />
+                        <p className="ml-2 font-serif text-[18px] text-gray-500">
+                          @usuario
+                        </p>
+                      </div>
 
-                    <RecommendedMusic title="Super Power Girl" artist="Kira" />
+                      <p className="mt-1 font-serif text-[12px] text-gray-500">
+                        Minha bio na Maré
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* AÇÕES */}
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      className="flex items-center gap-2 rounded-lg border border-[#252d38] px-3 py-2 font-serif text-[11px] text-gray-300 transition hover:border-blue-400 hover:text-blue-400"
+                    >
+                      <ShareNetworkIcon size={16} />
+                      Compartilhar
+                    </button>
+
+                    <button
+                      type="button"
+                      className="flex items-center gap-2 rounded-lg bg-[#5ea3ee] px-3 py-2 font-serif text-[11px] text-white transition hover:bg-[#7ab4f2]"
+                    >
+                      <PencilSimpleIcon size={16} />
+                      Editar perfil
+                    </button>
                   </div>
                 </div>
-              </aside>
+
+                {/* SEGUIDORES */}
+                <div className="mt-5 flex gap-6 font-serif text-[12px] text-gray-400">
+                  <span>
+                    <strong className="text-gray-200">70</strong> Seguidores
+                  </span>
+
+                  <span>
+                    <strong className="text-gray-200">87</strong> Seguindo
+                  </span>
+                </div>
+              </div>
+            </section>
+
+            {/* ABAS */}
+            <div className="mt-8 border-b border-[#252d38]">
+              <div className="flex gap-8">
+                <button
+                  type="button"
+                  className="border-b-2 border-blue-400 px-1 pb-3 font-serif text-[13px] text-white"
+                >
+                  Últimas avaliações
+                </button>
+
+                <button
+                  type="button"
+                  className="border-b-2 border-transparent px-1 pb-3 font-serif text-[13px] text-gray-500 transition hover:text-blue-400"
+                >
+                  Comentários
+                </button>
+
+                <button
+                  type="button"
+                  className="border-b-2 border-transparent px-1 pb-3 font-serif text-[13px] text-gray-500 transition hover:text-blue-400"
+                >
+                  Músicas salvas
+                </button>
+              </div>
             </div>
-          </div>
-        </main>
-      </div>
-    </div>
+
+            {/* ÚLTIMAS AVALIAÇÕES */}
+            <div className="flex flex-col gap-6 pt-6">
+              <div className="flex items-center gap-2">
+                <MusicNoteIcon size={18} className="text-blue-400" />
+
+                <h2 className="font-serif text-[16px] text-gray-100">
+                  Últimas avaliações
+                </h2>
+              </div>
+
+              <PostCard
+                name="Jurema"
+                username="Jurema0321"
+                time="2 minutos"
+                content="Essa música me transporta para outro universo toda vez que escuto. O trabalho de arranjo nos metais aqui é simplesmente fantástico!"
+                musicTitle="Marejada"
+                artist="Orquestra do Atlântico"
+                likes={18}
+                comments={9}
+              />
+            </div>
+          </section>
+
+          {/* RECOMENDAÇÕES */}
+          <aside className="hidden xl:block">
+            <div className="sticky top-40">
+              <h2 className="mb-5 font-serif text-[16px] text-white">
+                Músicas recomendadas
+              </h2>
+
+              <div className="flex flex-col gap-3">
+                <RecommendedMusic title="Lembrança" artist="Ayla" />
+
+                <RecommendedMusic title="Super Power Girl" artist="Kira" />
+              </div>
+            </div>
+          </aside>
+        </div>
+      </PageContent>
+    </PageLayout>
   );
 }

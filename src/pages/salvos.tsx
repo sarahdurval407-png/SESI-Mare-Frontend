@@ -1,47 +1,83 @@
-import SearchBar from "../components/searchbar";
-import Sidebar from "../components/sidebar";
-import MusicCard from "../components/musicCard";
 import PageLayout from "../components/pageLayout";
 import PageContent from "../components/pageContent";
+import SearchBar from "../components/searchbar";
+import MusicCard from "../components/musicCard";
+import RecommendedMusic from "../components/recommendedMusic";
 
 export default function Salvos() {
   return (
     <PageLayout>
       <PageContent>
-        {/* Sidebar */}
-        <Sidebar />
-
-        {/* Conteúdo central */}
-        <main className="min-h-screen px-4 sm:px-6 lg:px-8">
-          {/* Barra de pesquisa */}
-          <header className="h-20 flex items-center justify-center">
-            <SearchBar />
-          </header>
-
-          {/* Conteúdo */}
-          <div className="relative">
-            <section className="w-full max-w-[1000px] mx-auto">
-              {/* Título */}
-              <div className="mb-8">
-                <h1 className="text-2xl text-white">Músicas salvas</h1>
-
-                <p className="text-sm text-[#697386] mt-1">
-                  Músicas que você não quer deixar passar
-                </p>
+        <div className="grid grid-cols-1 gap-10 xl:grid-cols-[minmax(0,1fr)_340px]">
+          <div className="flex flex-col">
+            {/* BUSCA */}
+            <div className="sticky top-0 z-20 bg-[#080A10]">
+              <div className="w-full max-w-[800px] pt-6 pb-6">
+                <SearchBar />
               </div>
+            </div>
 
-              <div className="flex gap-4 overflow-x-auto">
-                <MusicCard
-                  tipo="post"
-                  titulo="Nome da música"
-                  artista="Nome do artista"
-                  nota={4.8}
-                  avaliacoes="124 avaliações"
-                />
-              </div>
+            {/* TÍTULO */}
+            <div className="mb-6">
+              <h1 className="font-serif text-[26px] text-gray-100">
+                Músicas salvas
+              </h1>
+
+              <p className="mt-1 font-serif text-[13px] text-[#697386]">
+                Músicas que você não quer deixar passar.
+              </p>
+            </div>
+
+            <section className="flex flex-col gap-4">
+              {/* Musicas */}
+              <MusicCard
+                tipo="post"
+                titulo="Marejada"
+                artista="Orquestra do Atlântico"
+                nota={4.8}
+                avaliacoes="124 avaliações"
+              />
+
+              <MusicCard
+                tipo="post"
+                titulo="Lembrança"
+                artista="Ayla"
+                nota={4.9}
+                avaliacoes="245 avaliações"
+              />
+
+              <MusicCard
+                tipo="post"
+                titulo="Super Power Girl"
+                artista="Kira"
+                nota={4.8}
+                avaliacoes="198 avaliações"
+              />
+
+              <MusicCard
+                tipo="post"
+                titulo="Retro Frequência"
+                artista="Vapor Wave"
+                nota={4.6}
+                avaliacoes="154 avaliações"
+              />
             </section>
           </div>
-        </main>
+          {/* RECOMENDAÇÕES */}
+          <aside className="hidden xl:block">
+            <div className="sticky top-40">
+              <h2 className="mb-5 font-serif text-[16px] text-white">
+                Músicas recomendadas
+              </h2>
+
+              <div className="flex flex-col gap-3">
+                <RecommendedMusic title="Lembrança" artist="Ayla" />
+
+                <RecommendedMusic title="Super Power Girl" artist="Kira" />
+              </div>
+            </div>
+          </aside>
+        </div>
       </PageContent>
     </PageLayout>
   );
