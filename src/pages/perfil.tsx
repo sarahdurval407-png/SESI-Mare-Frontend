@@ -100,11 +100,11 @@ export default function Perfil() {
                 {/* SEGUIDORES */}
                 <div className="mt-5 flex gap-6 font-serif text-[12px] text-gray-400">
                   <span>
-                    <strong className="text-gray-200">70</strong> Seguidores
+                    <strong className="text-gray-200" style={{ fontFamily: "inter, sans-serif" }}>70</strong> Seguidores
                   </span>
 
                   <span>
-                    <strong className="text-gray-200">87</strong> Seguindo
+                    <strong className="text-gray-200" style={{ fontFamily: "inter, sans-serif" }}>87</strong> Seguindo
                   </span>
                 </div>
               </div>
