@@ -102,7 +102,6 @@ function Login() {
                     absolute
                     top-6
                     left-0
-                    lg:left-10
                     z-20
                 "
       >
