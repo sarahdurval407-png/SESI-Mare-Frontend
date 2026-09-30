@@ -11,7 +11,7 @@ export default function Explorar() {
       <PageContent>
         {/* BUSCA */}
         <div className="sticky top-0 z-20 bg-[#080A10]">
-          <div className="w-full max-w-[800px] pt-6 pb-6">
+          <div className="w-[740px] max-w-full pt-6 pb-6">
             <SearchBar />
           </div>
         </div>

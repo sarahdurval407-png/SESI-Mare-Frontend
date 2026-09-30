@@ -10,8 +10,8 @@ interface PostCardProps {
   musicTitle: string;
   artist: string;
 
-  likes: number;
-  comments: number;
+  likes?: number;
+  comments?: number;
 }
 
 export default function PostCard({

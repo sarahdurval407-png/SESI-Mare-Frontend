@@ -44,9 +44,9 @@ export default function Perfil() {
               <div className="relative h-[140px] bg-[#141a28]">
                 <button
                   type="button"
-                  className="absolute right-4 top-4 flex items-center gap-2 rounded-lg bg-[#111726]/80 px-3 py-2 font-serif text-[11px] text-gray-300 transition hover:text-blue-400"
+                  className="absolute right-4 top-4 flex items-center gap-2 rounded-lg bg-[#111726]/80 px-3 py-2 font-serif text-[12px] text-gray-300 transition hover:text-blue-400"
                 >
-                  <CameraIcon size={16} />
+                  <CameraIcon size={18} />
                   Alterar capa
                 </button>
               </div>
@@ -54,19 +54,19 @@ export default function Perfil() {
               {/* INFORMAÇÕES */}
               <div className="px-6 pb-6">
                 <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-                  {/* AVATAR + NOME */}
+                  {/* Avatar */}
                   <div className="flex items-end gap-4">
-                    <div className="-mt-12 z-50 flex h-[82px] w-[82px] shrink-0 items-center justify-center rounded-full border-4 border-[#0d121c] bg-[#1a2130]">
+                    <div className="-mt-4 z-50 flex h-[82px] w-[82px] shrink-0 items-center justify-center rounded-full border-4 border-[#0d121c] bg-[#1a2130]">
                       <UserIcon size={34} className="text-gray-400" />
                     </div>
 
                     <div className="pb-1">
-                      <div className="flex">
+                      <div className="flex items-baseline">
                         <h2 className="font-serif text-[18px] text-gray-100">
                           Usuário
                         </h2>
 
-                        <p className="ml-2 font-serif text-[18px] text-gray-500">
+                        <p className="ml-2 font-serif text-[16px] text-gray-500">
                           @usuario
                         </p>
                       </div>
@@ -77,28 +77,28 @@ export default function Perfil() {
                     </div>
                   </div>
 
-                  {/* AÇÕES */}
+                  {/* Ações */}
                   <div className="flex items-center gap-3">
                     <button
                       type="button"
-                      className="flex items-center gap-2 rounded-lg border border-[#252d38] px-3 py-2 font-serif text-[11px] text-gray-300 transition hover:border-blue-400 hover:text-blue-400"
+                      className="flex items-center gap-2 rounded-lg border border-[#252d38] px-4 py-2 font-serif text-[12px] text-gray-300 transition hover:border-blue-400 hover:text-blue-400"
                     >
-                      <ShareNetworkIcon size={16} />
+                      <ShareNetworkIcon size={18} />
                       Compartilhar
                     </button>
 
                     <button
                       type="button"
-                      className="flex items-center gap-2 rounded-lg bg-[#5ea3ee] px-3 py-2 font-serif text-[11px] text-white transition hover:bg-[#7ab4f2]"
+                      className="flex items-center gap-2 rounded-lg bg-[#5ea3ee] px-4 py-2 font-serif text-[12px] text-white transition hover:bg-[#7ab4f2]"
                     >
-                      <PencilSimpleIcon size={16} />
+                      <PencilSimpleIcon size={18} />
                       Editar perfil
                     </button>
                   </div>
                 </div>
 
                 {/* SEGUIDORES */}
-                <div className="mt-5 flex gap-6 font-serif text-[12px] text-gray-400">
+                <div className="mt-5 flex gap-6 font-serif text-[14px] text-gray-400">
                   <span>
                     <strong className="text-gray-200" style={{ fontFamily: "inter, sans-serif" }}>70</strong> Seguidores
                   </span>
@@ -110,33 +110,33 @@ export default function Perfil() {
               </div>
             </section>
 
-            {/* ABAS */}
+            {/* Abas */}
             <div className="mt-8 border-b border-[#252d38]">
               <div className="flex gap-8">
                 <button
                   type="button"
-                  className="border-b-2 border-blue-400 px-1 pb-3 font-serif text-[13px] text-white"
+                  className="border-b-2 border-blue-400 px-1 pb-3 font-serif text-[14px] text-white"
                 >
                   Últimas avaliações
                 </button>
 
                 <button
                   type="button"
-                  className="border-b-2 border-transparent px-1 pb-3 font-serif text-[13px] text-gray-500 transition hover:text-blue-400"
+                  className="border-b-2 border-transparent px-1 pb-3 font-serif text-[14px] text-gray-500 transition hover:text-blue-400"
                 >
                   Comentários
                 </button>
 
                 <button
                   type="button"
-                  className="border-b-2 border-transparent px-1 pb-3 font-serif text-[13px] text-gray-500 transition hover:text-blue-400"
+                  className="border-b-2 border-transparent px-1 pb-3 font-serif text-[14px] text-gray-500 transition hover:text-blue-400"
                 >
                   Músicas salvas
                 </button>
               </div>
             </div>
 
-            {/* ÚLTIMAS AVALIAÇÕES */}
+            {/* Avaliações */}
             <div className="flex flex-col gap-6 pt-6">
               <div className="flex items-center gap-2">
                 <MusicNoteIcon size={18} className="text-blue-400" />
@@ -167,9 +167,9 @@ export default function Perfil() {
               </h2>
 
               <div className="flex flex-col gap-3">
-                <RecommendedMusic title="Lembrança" artist="Ayla" />
+                <RecommendedMusic titulo="Lembrança" artist="Ayla" />
 
-                <RecommendedMusic title="Super Power Girl" artist="Kira" />
+                <RecommendedMusic titulo="Super Power Girl" artist="Kira" />
               </div>
             </div>
           </aside>

@@ -83,12 +83,12 @@ export default function Home() {
               <div className="flex flex-col gap-3">
 
                 <RecommendedMusic
-                  title="Lembrança"
+                  titulo="Lembrança"
                   artist="Ayla"
                 />
 
                 <RecommendedMusic
-                  title="Super Power Girl"
+                  titulo="Super Power Girl"
                   artist="Kira"
                 />
 

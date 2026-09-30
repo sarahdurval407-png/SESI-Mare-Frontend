@@ -28,6 +28,10 @@ export default function Sidebar() {
     navigate("/login");
   }
 
+  function Post() {
+    navigate("/criarpost");
+  }
+
   return (
     <aside
       className="w-85 h-screen bg-[#111420] border-r border-[#354052] text-white flex flex-col justify-between fixed top-0 left-0 z-50"
@@ -44,6 +48,18 @@ export default function Sidebar() {
 
         {/* MENU */}
         <nav className="mt-4 flex flex-col">
+          <div className="px-8 mb-6 flex items-center gap-2">
+            <div className="w-14 h-14 rounded-full bg-[#d9d9d9]" />
+
+            <div>
+              <p className="text-white text-[16px]">Usuário</p>
+
+              <p className="text-[#697386] text-[12px]">@usuario</p>
+            </div>
+          </div>
+
+          <hr className="border-r border-[#354052]" />
+
           <Link
             to="/home"
             className="flex items-center gap-4 px-8 py-6 hover:bg-white/5 transition"
@@ -78,10 +94,9 @@ export default function Sidebar() {
         </nav>
 
         {/* Post */}
-
-        {/* Post */}
         <div className="px-8 my-6">
           <button
+            onClick={Post}
             className="
       w-full
       bg-[#58AAF0]

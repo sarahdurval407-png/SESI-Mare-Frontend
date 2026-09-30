@@ -12,6 +12,7 @@ import Salvos from "./pages/salvos";
 import Criarpost from "./pages/criarpost";
 import Contato from "./pages/contato";
 import { Toaster } from "react-hot-toast";
+import Musica from "./pages/musica";
 
 function App() {
   return (
@@ -31,13 +32,14 @@ function App() {
 
         {/* Páginas */}
         <Route path="/home" element={<Home />} />
-        <Route path="/Explorar" element={<Explorar />} />
+        <Route path="/explorar" element={<Explorar />} />
         <Route path="/filtrar" element={<Filtrar />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/acessibilidade" element={<Acessibilidade />} />
         <Route path="/artistas" element={<Artistas />} />
         <Route path="/salvos" element={<Salvos />} />
         <Route path="/criarpost" element={<Criarpost />} />
+        <Route path="/musica" element={<Musica />} />
 
       </Routes>
     </BrowserRouter>

@@ -71,9 +71,9 @@ export default function Salvos() {
               </h2>
 
               <div className="flex flex-col gap-3">
-                <RecommendedMusic title="Lembrança" artist="Ayla" />
+                <RecommendedMusic titulo="Lembrança" artist="Ayla" />
 
-                <RecommendedMusic title="Super Power Girl" artist="Kira" />
+                <RecommendedMusic titulo="Super Power Girl" artist="Kira" />
               </div>
             </div>
           </aside>

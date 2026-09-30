@@ -1,10 +1,10 @@
 interface RecommendedMusicProps {
-  title: string;
+  titulo: string;
   artist: string;
 }
 
 export default function RecommendedMusic({
-  title,
+  titulo,
   artist,
 }: RecommendedMusicProps) {
   return (
@@ -15,7 +15,7 @@ export default function RecommendedMusic({
 
         {/* Informações */}
         <div className="min-w-0 flex-1">
-          <p className="truncate text-xs text-[#d7dbe2]">{title}</p>
+          <p className="truncate text-xs text-[#d7dbe2]">{titulo}</p>
 
           <p className="mt-1 truncate text-[10px] text-[#697386]">{artist}</p>
         </div>
