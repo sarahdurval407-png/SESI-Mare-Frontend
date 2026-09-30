@@ -87,7 +87,7 @@ export default function CriarPost() {
 
           {/* direita */}
 
-          <aside className="hidden xl:block">
+          <aside className="xl:block">
             <div className="sticky top-40">
               <h2 className="mb-2 font-serif text-[18px] text-white">
                 Sua nota
