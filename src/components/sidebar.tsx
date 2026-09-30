@@ -8,14 +8,18 @@ import {
   UserIcon,
   GearIcon,
 } from "@phosphor-icons/react";
+import { useEffect, useState } from "react";
 
-interface LoggedUser {
+interface Usuario {
+  id: number;
+  username: string;
   nome: string;
   email: string;
 }
-
 export default function Sidebar() {
-  const loggedUser: LoggedUser | null = JSON.parse(
+  const [usuario, setUsuario] = useState<Usuario | null>(null);
+
+  const loggedUser: Usuario | null = JSON.parse(
     sessionStorage.getItem("user") || "null",
   );
 
@@ -31,6 +35,14 @@ export default function Sidebar() {
   function Post() {
     navigate("/criarpost");
   }
+
+  useEffect(() => {
+    const usuarioSalvo = localStorage.getItem("usuario");
+
+    if (usuarioSalvo) {
+      setUsuario(JSON.parse(usuarioSalvo));
+    }
+  }, []);
 
   return (
     <aside
@@ -49,12 +61,14 @@ export default function Sidebar() {
         {/* MENU */}
         <nav className="mt-4 flex flex-col">
           <div className="px-8 mb-6 flex items-center gap-2">
-            <div className="w-14 h-14 rounded-full bg-[#d9d9d9]" />
+            <div className="flex h-[80px] w-[80px] shrink-0 items-center justify-center rounded-full bg-[#1a2130]">
+              <UserIcon size={34} className="text-gray-400" />
+            </div>
 
             <div>
-              <p className="text-white text-[16px]">Usuário</p>
+              <p className="text-white text-[16px]"> {usuario?.nome || "Usuário"}</p>
 
-              <p className="text-[#697386] text-[12px]">@usuario</p>
+              <p className="text-[#697386] text-[12px]">{usuario?.username}</p>
             </div>
           </div>
 
@@ -114,12 +128,13 @@ export default function Sidebar() {
         </div>
       </div>
 
-      <div className="px-8 py-6 cursor-pointer  hover:bg-white/5 transition">
-        <button className="flex items-center gap-3 cursor-pointer">
-          <GearIcon size={20} />
-          Configurações
-        </button>
-      </div>
+      <Link
+        to="/configuracoes"
+        className="flex gap-4 px-8 py-6 cursor-pointer  hover:bg-white/5 transition"
+      >
+        <GearIcon size={20} />
+        Configurações
+      </Link>
     </aside>
   );
 }

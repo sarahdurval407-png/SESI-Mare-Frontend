@@ -141,7 +141,7 @@ export default function Perfil() {
               <div className="flex items-center gap-2">
                 <MusicNoteIcon size={18} className="text-blue-400" />
 
-                <h2 className="font-serif text-[16px] text-gray-100">
+                <h2 className="font-serif text-[18px] text-gray-100">
                   Últimas avaliações
                 </h2>
               </div>

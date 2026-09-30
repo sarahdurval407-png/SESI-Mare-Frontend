@@ -25,7 +25,7 @@ function Login() {
         },
 
         body: JSON.stringify({
-          email: login,
+          login: login,
           senha: senha,
         }),
       });

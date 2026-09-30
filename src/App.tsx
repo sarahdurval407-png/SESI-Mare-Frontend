@@ -13,37 +13,44 @@ import Criarpost from "./pages/criarpost";
 import Contato from "./pages/contato";
 import { Toaster } from "react-hot-toast";
 import Musica from "./pages/musica";
+import PublicRoute from "./PublicRoute";
+import ProtectedRoute from "./ProtectedRoute";
+import Configuracoes from "./pages/configuracoes"
 
 function App() {
   return (
     <BrowserRouter>
-
       <Toaster position="bottom-right" />
 
       <Routes>
         {/* Página não cadastrado */}
         <Route path="/" element={<Hero />} />
 
-
         {/* Cadastro */}
-        <Route path="/cadastro" element={<Cadastro />} />
-        <Route path="/login" element={<Login />} />
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/cadastro" element={<Cadastro />} />
+        </Route>
+
+        {/* Saiba mais */}
         <Route path="/contato" element={<Contato />} />
 
         {/* Páginas */}
-        <Route path="/home" element={<Home />} />
-        <Route path="/explorar" element={<Explorar />} />
-        <Route path="/filtrar" element={<Filtrar />} />
-        <Route path="/perfil" element={<Perfil />} />
-        <Route path="/acessibilidade" element={<Acessibilidade />} />
-        <Route path="/artistas" element={<Artistas />} />
-        <Route path="/salvos" element={<Salvos />} />
-        <Route path="/criarpost" element={<Criarpost />} />
-        <Route path="/musica" element={<Musica />} />
-
+        <Route element={<ProtectedRoute/>}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/explorar" element={<Explorar />} />
+          <Route path="/filtrar" element={<Filtrar />} />
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/acessibilidade" element={<Acessibilidade />} />
+          <Route path="/artistas" element={<Artistas />} />
+          <Route path="/salvos" element={<Salvos />} />
+          <Route path="/criarpost" element={<Criarpost />} />
+          <Route path="/musica" element={<Musica />} />
+          <Route path="/configuracoes" element={<Configuracoes/>}></Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );
 }
 
-export default App;  
+export default App;

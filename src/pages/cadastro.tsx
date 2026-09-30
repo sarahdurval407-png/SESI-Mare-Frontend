@@ -11,7 +11,7 @@ function Cadastro() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    usuario: "",
+    username: "",
     email: "",
     senha: "",
     confirmarSenha: "",
@@ -58,7 +58,7 @@ function Cadastro() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            nome: formData.usuario,
+            username: formData.username,
             email: formData.email,
             senha: formData.senha,
           }),
@@ -80,7 +80,7 @@ function Cadastro() {
 
       // LIMPA O FORMULÁRIO
       setFormData({
-        usuario: "",
+        username: "",
         email: "",
         senha: "",
         confirmarSenha: "",
@@ -233,11 +233,11 @@ function Cadastro() {
               </label>
 
               <input
-                id="usuario"
-                name="usuario"
+                id="username"
+                name="username"
                 type="text"
                 required
-                value={formData.usuario}
+                value={formData.username}
                 onChange={handleChange}
                 placeholder="Digite seu usuário"
                 className="

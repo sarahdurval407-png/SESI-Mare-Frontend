@@ -1,48 +1,50 @@
 import { UserIcon } from "@phosphor-icons/react";
 import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import logo from "../assets/logo.png";
 
 
 function Navbar() {
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [usuario, setUsuario] = useState<Usuario | null>(null);
 
-    const [showNavbar, setShowNavbar] = useState(true);
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
 
-    useEffect(() => {
+    function handleScroll() {
+      const currentScrollY = window.scrollY;
 
-        let lastScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // descendo
+        setShowNavbar(false);
+      } else {
+        // subindo
+        setShowNavbar(true);
+      }
 
-        function handleScroll() {
+      lastScrollY = currentScrollY;
+    }
 
-            const currentScrollY = window.scrollY;
+    window.addEventListener("scroll", handleScroll);
 
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                // descendo
-                setShowNavbar(false);
-            } else {
-                // subindo
-                setShowNavbar(true);
-            }
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-            lastScrollY = currentScrollY;
-        }
+  useEffect(() => {
+  const usuarioSalvo = localStorage.getItem("usuario");
 
-        window.addEventListener("scroll", handleScroll);
+  if (usuarioSalvo) {
+    setUsuario(JSON.parse(usuarioSalvo));
+  }
+}, []);
 
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
 
-    }, []);
-
-    /* Classe dos links da navbar */
-    const navLinkClass = ({ isActive }) =>
-        `relative text-[16px] transition duration-300
-        ${isActive
-            ? "text-[#58AAF0]"
-            : "text-[#E4EFFF] hover:text-[#58AAF0]"
-        }
+  /* Classe dos links da navbar */
+  const navLinkClass = ({ isActive }) =>
+    `relative text-[16px] transition duration-300
+        ${isActive ? "text-[#58AAF0]" : "text-[#E4EFFF] hover:text-[#58AAF0]"}
         after:content-['']
         after:absolute
         after:left-0
@@ -51,16 +53,11 @@ function Navbar() {
         after:bg-[#58AAF0]
         after:transition-all
         after:duration-300
-        ${isActive
-            ? "after:w-full"
-            : "after:w-0 hover:after:w-full"
-        }`;
+        ${isActive ? "after:w-full" : "after:w-0 hover:after:w-full"}`;
 
-
-    return (
-
-        <header
-            className={`
+  return (
+    <header
+      className={`
         fixed
         top-0
         left-0
@@ -76,91 +73,64 @@ function Navbar() {
         duration-300
         ${showNavbar ? "translate-y-0" : "-translate-y-full"}
     `}
-        >
+    >
+      {/* LOGO */}
 
-            {/* LOGO */}
-
-            <Link to="/">
-
-                <img
-                    src={logo}
-                    alt="Logo Maré"
-                    className="
+      <Link to="/">
+        <img
+          src={logo}
+          alt="Logo Maré"
+          className="
                         w-[100px]
                         h-[80px]
                         object-contain
                     "
-                />
+        />
+      </Link>
 
-            </Link>
+      {/* MENU */}
 
+      <nav className="flex items-center gap-16">
+        <NavLink to="/" end className={navLinkClass}>
+          Início
+        </NavLink>
 
-            {/* MENU */}
+        <NavLink to="/comunidade" end className={navLinkClass}>
+          Comunidade
+        </NavLink>
 
-            <nav className="flex items-center gap-16">
+        <NavLink to="/contato" className={navLinkClass}>
+          Contato
+        </NavLink>
 
+        <NavLink to="/faq" className={navLinkClass}>
+          FAQ
+        </NavLink>
 
-                <NavLink
-                    to="/"
-                    end
-                    className={navLinkClass}
-                >
-                    Início
-                </NavLink>
+        {/* PERFIL */}
 
-                <NavLink
-                    to="/comunidade"
-                    end
-                    className={navLinkClass}
-                >
-                    Comunidade
-                </NavLink>
-
-
-                <NavLink
-                    to="/contato"
-                    className={navLinkClass}
-                >
-                    Contato
-                </NavLink>
-
-
-                <NavLink
-                    to="/faq"
-                    className={navLinkClass}
-                >
-                    FAQ
-                </NavLink>
-
-
-                {/* PERFIL */}
-
-                <NavLink
-                    to="/login"
-                    className={({ isActive }) =>
-                        `
+        <NavLink
+          to="/perfil"
+          className={({ isActive }) =>
+            `
+                    flex gap-4
                         transition
                         duration-300
-                        ${isActive
+                        ${
+                          isActive
                             ? "text-[#58AAF0]"
                             : "text-[#E4EFFF] hover:text-[#58AAF0]"
                         }
                         `
-                    }
-                >
+          }
+        >
+          <p>Olá, {usuario?.username}</p>
 
-                    <UserIcon
-                        size={24}
-                        strokeWidth={1.5}
-                    />
-
-                </NavLink>
-
-            </nav>
-
-        </header>
-    );
+          <UserIcon size={24} strokeWidth={1.5} />
+        </NavLink>
+      </nav>
+    </header>
+  );
 }
-
 
 export default Navbar;
