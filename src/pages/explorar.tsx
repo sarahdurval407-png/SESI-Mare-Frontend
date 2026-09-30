@@ -45,6 +45,7 @@ export default function Explorar() {
               nota={4.8}
               avaliacoes="124 avaliações"
             />
+            
           </div>
         </section>
 

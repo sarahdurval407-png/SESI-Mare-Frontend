@@ -11,6 +11,7 @@ import Explorar from "./pages/explorar";
 import Salvos from "./pages/salvos";
 import Criarpost from "./pages/criarpost";
 import Contato from "./pages/contato";
+import Configuracao from "./pages/configuracao";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/artistas" element={<Artistas />} />
         <Route path="/salvos" element={<Salvos />} />
         <Route path="/criarpost" element={<Criarpost />} />
+        <Route path="/configuracao" element={<Configuracao />} />
 
       </Routes>
     </BrowserRouter>
