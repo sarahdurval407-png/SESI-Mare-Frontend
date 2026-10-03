@@ -17,9 +17,7 @@ export default function CriarPost() {
       <PageContent>
         <div className="grid grid-cols-1 gap-10 xl:grid-cols-[minmax(0,1fr)_340px]">
           <main className="min-w-0">
-            <div className="pt-6">
               <SearchBar />
-            </div>
 
             {/* Titulo */}
             <h1 className="text-white font-serif text-[26px] mt-5">

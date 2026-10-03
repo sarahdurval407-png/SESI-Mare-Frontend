@@ -19,10 +19,8 @@ export default function Home() {
             {/* ÁREA FIXA */}
             <div className="sticky top-0 z-20 bg-[#080A10]">
 
-              {/* BUSCA */}
-              <div className="pt-6">
-                <SearchBar />
-              </div>
+
+              <SearchBar />
 
               {/* FEED TABS */}
               <div className="flex justify-center pb-2 pt-4">

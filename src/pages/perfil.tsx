@@ -22,7 +22,7 @@ export default function Perfil() {
           <section className="min-w-0">
             {/* ÁREA FIXA */}
             <div className="sticky top-0 z-20 bg-[#080A10]">
-              <div className="w-full max-w-[800px] pt-6 pb-6">
+              <div className="w-full pb-6">
                 <SearchBar />
               </div>
             </div>

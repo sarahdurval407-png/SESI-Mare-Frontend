@@ -1,8 +1,13 @@
 import { UserIcon } from "@phosphor-icons/react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink} from "react-router-dom";
 import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 
+interface Usuario {
+  nome: string;
+  email: string;
+  username: string;
+}
 
 function Navbar() {
   const [showNavbar, setShowNavbar] = useState(true);
@@ -33,27 +38,33 @@ function Navbar() {
   }, []);
 
   useEffect(() => {
-  const usuarioSalvo = localStorage.getItem("usuario");
+    const usuarioSalvo = localStorage.getItem("usuario");
 
-  if (usuarioSalvo) {
-    setUsuario(JSON.parse(usuarioSalvo));
-  }
-}, []);
+    if (usuarioSalvo) {
+      setUsuario(JSON.parse(usuarioSalvo));
+    }
+  }, []);
 
 
   /* Classe dos links da navbar */
-  const navLinkClass = ({ isActive }) =>
+  const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `relative text-[16px] transition duration-300
-        ${isActive ? "text-[#58AAF0]" : "text-[#E4EFFF] hover:text-[#58AAF0]"}
-        after:content-['']
-        after:absolute
-        after:left-0
-        after:bottom-[-6px]
-        after:h-[2px]
-        after:bg-[#58AAF0]
-        after:transition-all
-        after:duration-300
-        ${isActive ? "after:w-full" : "after:w-0 hover:after:w-full"}`;
+  ${isActive
+      ? "text-[#58AAF0]"
+      : "text-[#E4EFFF] hover:text-[#58AAF0]"
+    }
+  after:content-['']
+  after:absolute
+  after:left-0
+  after:bottom-[-6px]
+  after:h-[2px]
+  after:bg-[#58AAF0]
+  after:transition-all
+  after:duration-300
+  ${isActive
+      ? "after:w-full"
+      : "after:w-0 hover:after:w-full"
+    }`;
 
   return (
     <header
@@ -95,8 +106,8 @@ function Navbar() {
           Início
         </NavLink>
 
-        <NavLink to="/comunidade" end className={navLinkClass}>
-          Comunidade
+        <NavLink to="/sobre" end className={navLinkClass}>
+          Sobre
         </NavLink>
 
         <NavLink to="/contato" className={navLinkClass}>
@@ -112,19 +123,13 @@ function Navbar() {
         <NavLink
           to="/perfil"
           className={({ isActive }) =>
-            `
-                    flex gap-4
-                        transition
-                        duration-300
-                        ${
-                          isActive
-                            ? "text-[#58AAF0]"
-                            : "text-[#E4EFFF] hover:text-[#58AAF0]"
-                        }
-                        `
+            `flex gap-4 transition duration-300 ${isActive
+              ? "text-[#58AAF0]"
+              : "text-[#E4EFFF] hover:text-[#58AAF0]"
+            }`
           }
         >
-          <p>Olá, {usuario?.username}</p>
+          {usuario && <p>Olá, {usuario.nome}</p>}
 
           <UserIcon size={24} strokeWidth={1.5} />
         </NavLink>
