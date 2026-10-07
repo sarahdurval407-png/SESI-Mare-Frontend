@@ -3,19 +3,20 @@ import Home from "./pages/home";
 import Hero from "./pages/hero";
 import Cadastro from "./pages/cadastro";
 import Login from "./pages/login";
-import Filtrar from "./pages/filtrar";
 import Perfil from "./pages/perfil";
-import Acessibilidade from "./pages/acessibilidade";
 import Artistas from "./pages/artistas";
 import Explorar from "./pages/explorar";
 import Salvos from "./pages/salvos";
 import Criarpost from "./pages/criarpost";
 import Contato from "./pages/contato";
+import Configuracoes from "./pages/configuracoes"
+import Faq from "./pages/faq"
+import Sobre from "./pages/sobre"
 import { Toaster } from "react-hot-toast";
 import Musica from "./pages/musica";
 import PublicRoute from "./PublicRoute";
 import ProtectedRoute from "./ProtectedRoute";
-import Configuracoes from "./pages/configuracoes"
+
 
 function App() {
   return (
@@ -34,21 +35,20 @@ function App() {
 
         {/* Saiba mais */}
         <Route path="/contato" element={<Contato />} />
+        <Route path="/faq" element={<Faq />} />
+        <Route path="/sobre" element={<Sobre />} />
 
-        {/* Páginas */}
-        <Route element={<ProtectedRoute/>}>
+
           <Route path="/home" element={<Home />} />
           <Route path="/explorar" element={<Explorar />} />
-          <Route path="/filtrar" element={<Filtrar />} />
           <Route path="/perfil" element={<Perfil />} />
-          <Route path="/acessibilidade" element={<Acessibilidade />} />
           <Route path="/artistas" element={<Artistas />} />
           <Route path="/salvos" element={<Salvos />} />
           <Route path="/criarpost" element={<Criarpost />} />
           <Route path="/musica" element={<Musica />} />
           <Route path="/musica/:id" element={<Musica />} />
-          <Route path="/configuracoes" element={<Configuracoes/>}></Route>
-        </Route>
+          <Route path="/configuracoes" element={<Configuracoes/>} />
+
       </Routes>
     </BrowserRouter>
   );

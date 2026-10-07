@@ -13,10 +13,7 @@ export default function Musica() {
         <div className="grid grid-cols-1 gap-10 xl:grid-cols-[minmax(0,1fr)_340px]">
           <main className="min-w-0">
             <div className="sticky top-0 z-20 bg-[#080A10]">
-              {/* Pesquisa */}
-              <div className="pt-6">
                 <SearchBar />
-              </div>
             </div>
 
             {/* Capa */}

@@ -438,37 +438,6 @@ function Cadastro() {
                                         focus:ring-[#58AAF0]
                                     "
                 />
-
-                <button
-                  type="button"
-                  onClick={() =>
-                    setMostrarConfirmarSenha(
-                      !mostrarConfirmarSenha
-                    )
-                  }
-                  className="
-                                        absolute
-                                        right-3
-                                        top-1/2
-                                        -translate-y-1/2
-                                        text-[#8FA1B5]
-                                        hover:text-[#58AAF0]
-                                        transition
-                                        cursor-pointer
-                                    "
-                  aria-label={
-                    mostrarConfirmarSenha
-                      ? "Ocultar confirmação da senha"
-                      : "Mostrar confirmação da senha"
-                  }
-                >
-                  {mostrarConfirmarSenha ? (
-                    <EyeOff size={20} />
-                  ) : (
-                    <Eye size={20} />
-                  )}
-                </button>
-
               </div>
 
             </div>

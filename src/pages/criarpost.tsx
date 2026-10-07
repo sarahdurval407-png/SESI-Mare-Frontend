@@ -185,9 +185,7 @@ export default function CriarPost() {
         <div className="grid grid-cols-1 gap-10 xl:grid-cols-[minmax(0,1fr)_340px]">
           {/* PRINCIPAL */}
           <main className="min-w-0">
-            <div className="pt-6">
               <SearchBar />
-            </div>
 
             {/* Título */}
             <h1 className="mt-5 font-serif text-[26px] text-white">
