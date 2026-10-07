@@ -4,10 +4,6 @@ import SearchBar from "../components/searchbar";
 import OuvirCard from "../components/ouvirCard";
 
 import { StarIcon, PlusIcon } from "@phosphor-icons/react";
-
-import { SiYoutubemusic } from "react-icons/si";
-import { FaAmazon, FaSpotify } from "react-icons/fa";
-import { BsAppleMusic } from "react-icons/bs";
 import PostCard from "../components/postCard";
 
 export default function Musica() {

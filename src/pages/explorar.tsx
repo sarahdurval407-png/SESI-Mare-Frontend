@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import PageLayout from "../components/pageLayout";
 import PageContent from "../components/pageContent";
 import SearchBar from "../components/searchbar";
@@ -6,6 +8,39 @@ import MusicCard from "../components/musicCard";
 import { TrendUpIcon, StarIcon, SparkleIcon } from "@phosphor-icons/react";
 
 export default function Explorar() {
+  const [musicas, setMusicas] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function buscarMusicas() {
+      try {
+        const resposta = await fetch("http://localhost:3000/musicas");
+
+        if (!resposta.ok) {
+          throw new Error("Erro ao buscar músicas");
+        }
+
+        const dados = await resposta.json();
+
+        setMusicas(dados);
+      } catch (erro) {
+        console.error("Erro ao buscar músicas:", erro);
+      }
+    }
+
+    buscarMusicas();
+  }, []);
+
+  // Em alta
+  const musicasEmAlta = musicas.slice(0, 16);
+
+  // Mais bem avaliadas
+  const musicasMaisBemAvaliadas = [...musicas]
+    .sort((a, b) => b.nota - a.nota)
+    .slice(0, 16);
+
+  // Recomendadas
+  const musicasRecomendadas = musicas.slice(0, 16);
+
   return (
     <PageLayout>
       <PageContent>
@@ -18,7 +53,9 @@ export default function Explorar() {
 
         {/* TÍTULO */}
         <div className="mb-10">
-          <h1 className="font-serif text-[26px] text-gray-100">Explorar</h1>
+          <h1 className="font-serif text-[26px] text-gray-100">
+            Explorar
+          </h1>
 
           <p className="mt-1 font-serif text-[13px] text-[#697386]">
             Descubra novas músicas, artistas e posts.
@@ -33,18 +70,24 @@ export default function Explorar() {
           <div className="mb-5 flex items-center gap-2">
             <TrendUpIcon size={18} className="text-[#58a9e8]" />
 
-            <h2 className="font-serif text-[17px] text-white">Em alta</h2>
+            <h2 className="font-serif text-[17px] text-white">
+              Em alta
+            </h2>
           </div>
 
-          {/* CARROSSEL */}
-          <div className="flex gap-4 overflow-x-auto pb-3 shrink-0">
-            <MusicCard
-              tipo="banner"
-              titulo="Marejada"
-              artista="Orquestra do Atlântico"
-              nota={4.8}
-              avaliacoes="124 avaliações"
-            />
+          <div className="flex gap-4 overflow-x-hidden pb-3">
+            {musicasEmAlta.map((musica) => (
+              <MusicCard
+                key={musica.id}
+                tipo="banner"
+                titulo={musica.titulo}
+                artista={musica.artista.nome}
+                capa={musica.capa}
+                nota={musica.nota}
+                avaliacoes={musica.avaliacoes}
+                duracaoSegundos={musica.duracaoSegundos}
+              />
+            ))}
           </div>
         </section>
 
@@ -61,15 +104,19 @@ export default function Explorar() {
             </h2>
           </div>
 
-          {/* CARROSSEL */}
           <div className="flex gap-4 overflow-x-auto pb-3">
-            <MusicCard
-              tipo="quadrado"
-              titulo="Marejada"
-              artista="Orquestra do Atlântico"
-              nota={5}
-              avaliacoes="328 avaliações"
-            />
+            {musicasMaisBemAvaliadas.map((musica) => (
+              <MusicCard
+                key={musica.id}
+                tipo="quadrado"
+                titulo={musica.titulo}
+                artista={musica.artista.nome}
+                capa={musica.capa}
+                nota={musica.nota}
+                avaliacoes={musica.avaliacoes}
+                duracaoSegundos={musica.duracaoSegundos}
+              />
+            ))}
           </div>
         </section>
 
@@ -86,15 +133,19 @@ export default function Explorar() {
             </h2>
           </div>
 
-          {/* CARROSSEL */}
           <div className="flex gap-4 overflow-x-auto pb-3">
-            <MusicCard
-              tipo="quadrado"
-              titulo="Lembrança"
-              artista="Ayla"
-              nota={4.7}
-              avaliacoes="96 avaliações"
-            />
+            {musicasRecomendadas.map((musica) => (
+              <MusicCard
+                key={musica.id}
+                tipo="quadrado"
+                titulo={musica.titulo}
+                artista={musica.artista.nome}
+                capa={musica.capa}
+                nota={musica.nota}
+                avaliacoes={musica.avaliacoes}
+                duracaoSegundos={musica.duracaoSegundos}
+              />
+            ))}
           </div>
         </section>
       </PageContent>

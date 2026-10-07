@@ -46,6 +46,7 @@ function App() {
           <Route path="/salvos" element={<Salvos />} />
           <Route path="/criarpost" element={<Criarpost />} />
           <Route path="/musica" element={<Musica />} />
+          <Route path="/musica/:id" element={<Musica />} />
           <Route path="/configuracoes" element={<Configuracoes/>}></Route>
         </Route>
       </Routes>

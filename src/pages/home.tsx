@@ -4,21 +4,47 @@ import SearchBar from "../components/searchbar";
 import PostCard from "../components/postCard";
 import RecommendedMusic from "../components/recommendedMusic";
 import FeedTabs from "../components/feedTabs";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [posts, setPosts] = useState<any[]>([]);
+  const [musicas, setMusicas] = useState<any[]>([]);
+  const [abaAtiva, setAbaAtiva] = useState<"paraVoce" | "seguindo">("paraVoce");
+
+  useEffect(() => {
+    async function buscarDados() {
+      try {
+        const [respostaPosts, respostaMusicas] = await Promise.all([
+          fetch("http://localhost:3000/posts"),
+          fetch("http://localhost:3000/musicas"),
+        ]);
+
+        if (!respostaPosts.ok || !respostaMusicas.ok) {
+          throw new Error("Erro ao buscar dados");
+        }
+
+        const dadosPosts = await respostaPosts.json();
+        const dadosMusicas = await respostaMusicas.json();
+
+        setPosts(dadosPosts);
+        setMusicas(dadosMusicas);
+      } catch (erro) {
+        console.error("Erro ao buscar dados:", erro);
+      }
+    }
+
+    buscarDados();
+  }, []);
+
   return (
     <PageLayout>
       <PageContent>
-
         {/* COLUNAS */}
         <div className="grid grid-cols-1 gap-10 xl:grid-cols-[minmax(0,1fr)_340px]">
-
           {/* COLUNA PRINCIPAL */}
           <section className="min-w-0">
-
             {/* ÁREA FIXA */}
             <div className="sticky top-0 z-20 bg-[#080A10]">
-
               {/* BUSCA */}
               <div className="pt-6">
                 <SearchBar />
@@ -26,80 +52,66 @@ export default function Home() {
 
               {/* FEED TABS */}
               <div className="flex justify-center pb-2 pt-4">
-                <FeedTabs />
+                <FeedTabs abaAtiva={abaAtiva} setAbaAtiva={setAbaAtiva} />
               </div>
-
             </div>
 
             {/* POSTS */}
             <div className="flex flex-col gap-6 pt-4">
-
-              <PostCard
-                name="Jurema"
-                username="Jurema0321"
-                time="2 minutos"
-                content="Essa música me transporta para outro universo toda vez que escuto."
-                musicTitle="Marejada"
-                artist="Orquestra do Atlântico"
-                likes={18}
-                comments={9}
-              />
-
-              <PostCard
-                name="Carlos F"
-                username="Carlinhos"
-                time="12 minutos"
-                content="Alguém mais acionou para o lançamento do novo álbum na próxima semana?"
-                musicTitle="Horizonte Sombrio"
-                artist="Lumina Noir"
-                likes={22}
-                comments={14}
-              />
-
-              <PostCard
-                name="Sico"
-                username="PorquinhoMatado"
-                time="27 minutos"
-                content="Simplesmente impecável."
-                musicTitle="Retro Frequência"
-                artist="Vapor Wave"
-                likes={24}
-                comments={11}
-              />
-
+              {posts.length > 0 ? (
+                posts.map((post) => (
+                  <PostCard
+                    key={post.id}
+                    name={post.usuario?.nome}
+                    username={post.usuario?.username}
+                    foto={post.usuario?.foto}
+                    time={post.dataCriacao}
+                    content={post.texto}
+                    musicTitle={post.musica?.titulo}
+                    artist={post.musica?.artista?.nome}
+                    musicCover={post.musica?.capa}
+                    nota={post.nota}
+                    avaliacoes={post.musica?.avaliacoes}
+                    likes={post._count?.curtidas}
+                    comments={post._count?.comentarios}
+                  />
+                ))
+              ) : (
+                <p className="py-8 text-center text-[14px] text-[#697386]">
+                  Nenhum post feito.
+                </p>
+              )}
             </div>
-
           </section>
 
           {/* RECOMENDAÇÕES */}
           <aside className="hidden xl:block">
-
-            <div className="sticky top-40">
-
+            <div className="fixed top-2/5 -translate-y-1/2 w-[340px]">
               <h2 className="mb-5 font-serif text-[16px] text-white">
                 Músicas recomendadas
               </h2>
 
               <div className="flex flex-col gap-3">
-
-                <RecommendedMusic
-                  titulo="Lembrança"
-                  artist="Ayla"
-                />
-
-                <RecommendedMusic
-                  titulo="Super Power Girl"
-                  artist="Kira"
-                />
-
+                {musicas.length > 0 ? (
+                  musicas
+                    .slice(0, 5)
+                    .map((musica) => (
+                      <RecommendedMusic
+                        key={musica.id}
+                        titulo={musica.titulo}
+                        artist={musica.artista.nome}
+                        capa={musica.capa}
+                      />
+                    ))
+                ) : (
+                  <p className="py-8 text-center text-[14px] text-[#697386]">
+                    Nenhuma música recomendada.
+                  </p>
+                )}
               </div>
-
             </div>
-
           </aside>
-
         </div>
-
       </PageContent>
     </PageLayout>
   );
