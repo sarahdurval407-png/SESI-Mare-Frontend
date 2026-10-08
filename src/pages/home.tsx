@@ -5,6 +5,7 @@ import PostCard from "../components/postCard";
 import RecommendedMusic from "../components/recommendedMusic";
 import FeedTabs from "../components/feedTabs";
 import { useEffect, useState } from "react";
+import { API_URL } from "../api";
 
 export default function Home() {
   const [posts, setPosts] = useState<any[]>([]);
@@ -15,8 +16,8 @@ export default function Home() {
     async function buscarDados() {
       try {
         const [respostaPosts, respostaMusicas] = await Promise.all([
-          fetch("http://localhost:3000/posts"),
-          fetch("http://localhost:3000/musicas"),
+          fetch(`${API_URL}/posts`),
+          fetch(`${API_URL}/musicas`),
         ]);
 
         if (!respostaPosts.ok || !respostaMusicas.ok) {
@@ -61,6 +62,7 @@ export default function Home() {
               {posts.length > 0 ? (
                 posts.map((post) => (
                   <PostCard
+                    postId={post.id}
                     key={post.id}
                     name={post.usuario?.nome}
                     username={post.usuario?.username}

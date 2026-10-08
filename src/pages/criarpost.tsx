@@ -4,7 +4,7 @@ import PageLayout from "../components/pageLayout";
 import PageContent from "../components/pageContent";
 import SearchBar from "../components/searchbar";
 import OuvirCard from "../components/ouvirCard";
-
+import { API_URL } from "../api";
 
 import { MagnifyingGlassIcon, PlusIcon } from "@phosphor-icons/react";
 
@@ -48,7 +48,7 @@ export default function CriarPost() {
   useEffect(() => {
     async function buscarMusicas() {
       try {
-        const resposta = await fetch("http://localhost:3000/musicas");
+        const resposta = await fetch(`${API_URL}/musicas`);
 
         if (!resposta.ok) {
           throw new Error("Erro ao buscar músicas");
@@ -108,7 +108,7 @@ export default function CriarPost() {
 
       const token = localStorage.getItem("token");
 
-      const resposta = await fetch("http://localhost:3000/posts", {
+      const resposta = await fetch(`${API_URL}/posts`, {
         method: "POST",
 
         headers: {

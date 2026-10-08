@@ -4,6 +4,7 @@ import PageLayout from "../components/pageLayout";
 import PageContent from "../components/pageContent";
 import SearchBar from "../components/searchbar";
 import MusicCard from "../components/musicCard";
+import { API_URL } from "../api";
 
 import { TrendUpIcon, StarIcon, SparkleIcon } from "@phosphor-icons/react";
 
@@ -13,7 +14,7 @@ export default function Explorar() {
   useEffect(() => {
     async function buscarMusicas() {
       try {
-        const resposta = await fetch("http://localhost:3000/musicas");
+        const resposta = await fetch(`${API_URL}/musicas`);
 
         if (!resposta.ok) {
           throw new Error("Erro ao buscar músicas");

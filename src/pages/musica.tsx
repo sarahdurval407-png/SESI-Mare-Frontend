@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-
+import { useNavigate, useParams, Link } from "react-router-dom";
 import PageLayout from "../components/pageLayout";
 import PageContent from "../components/pageContent";
 import SearchBar from "../components/searchbar";
 import OuvirCard from "../components/ouvirCard";
 import PostCard from "../components/postCard";
+import { API_URL } from "../api";
 
 import { StarIcon, PlusIcon, BookmarkSimpleIcon } from "@phosphor-icons/react";
 
@@ -30,7 +30,7 @@ export default function Musica() {
 
     setCarregando(true);
 
-    fetch(`http://localhost:3000/musicas/${id}`)
+    fetch(`${API_URL}/musicas/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Música não encontrada");
@@ -56,7 +56,7 @@ export default function Musica() {
   useEffect(() => {
     if (!musica?.genero || !id) return;
 
-    fetch(`http://localhost:3000/musicas`)
+    fetch(`${API_URL}/musicas`)
       .then((res) => res.json())
       .then((data) => {
         const relacionadas = data
@@ -80,7 +80,7 @@ export default function Musica() {
   useEffect(() => {
     if (!id) return;
 
-    fetch(`http://localhost:3000/posts?musicaId=${id}`)
+    fetch(`${API_URL}/posts?musicaId=${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Erro ao buscar posts");
@@ -106,7 +106,7 @@ export default function Musica() {
         if (!token) return;
 
         const resposta = await fetch(
-          "http://localhost:3000/usuarios/me/salvos",
+          `${API_URL}/usuarios/me/salvos`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -145,7 +145,7 @@ export default function Musica() {
       }
 
       const resposta = await fetch(
-        `http://localhost:3000/musicas/${id}/salvar`,
+        `${API_URL}/musicas/${id}/salvar`,
         {
           method: salva ? "DELETE" : "POST",
           headers: {
@@ -268,16 +268,21 @@ export default function Musica() {
                     {musica.titulo}
                   </h1>
 
-                  <p className="mt-1 truncate text-[14px] text-[#d0d0d0]">
-                    {musica.artista?.fotoURL && (
-                      <img
-                        src={musica.artista.fotoURL}
-                        alt={musica.artista.nome}
-                        className="mr-2 inline-block h-6 w-6 rounded-full object-cover"
-                      />
-                    )}
-                    {musica.artista?.nome || "Artista"}
-                  </p>
+                  {musica.artista && (
+                    <Link
+                      to={`/artista/${musica.artista.id}`}
+                      className="mt-1 block truncate text-[14px] text-[#d0d0d0] transition hover:text-[#58AAF0]"
+                    >
+                      {musica.artista.fotoURL && (
+                        <img
+                          src={musica.artista.fotoURL}
+                          alt=""
+                          className="mr-2 inline-block h-6 w-6 rounded-full object-cover"
+                        />
+                      )}
+                      {musica.artista.nome}
+                    </Link>
+                  )}
 
                   <div className="mt-3 flex items-center gap-3">
 
@@ -376,6 +381,7 @@ export default function Musica() {
                 {posts.length > 0 ? (
                   posts.map((post) => (
                     <PostCard
+                      postId={post.id}
                       key={post.id}
                       name={post.usuario?.nome}
                       username={post.usuario?.username}

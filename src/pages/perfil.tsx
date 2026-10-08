@@ -519,6 +519,7 @@ export default function Perfil() {
                     {avaliacoes.length > 0 ? (
                       avaliacoes.map((post) => (
                         <PostCard
+                          postId={post.id}
                           key={post.id}
                           name={post.usuario.nome}
                           username={post.usuario.username}

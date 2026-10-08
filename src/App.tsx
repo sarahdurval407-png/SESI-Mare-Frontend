@@ -4,7 +4,6 @@ import Hero from "./pages/hero";
 import Cadastro from "./pages/cadastro";
 import Login from "./pages/login";
 import Perfil from "./pages/perfil";
-import Artistas from "./pages/artistas";
 import Explorar from "./pages/explorar";
 import Salvos from "./pages/salvos";
 import Criarpost from "./pages/criarpost";
@@ -15,8 +14,10 @@ import Sobre from "./pages/sobre"
 import { Toaster } from "react-hot-toast";
 import Musica from "./pages/musica";
 import PublicRoute from "./PublicRoute";
+import Resultados from "./pages/resultados";
+import Artista from "./pages/artista";
 import ProtectedRoute from "./ProtectedRoute";
-
+import Post from "./pages/post";
 
 function App() {
   return (
@@ -39,15 +40,19 @@ function App() {
         <Route path="/sobre" element={<Sobre />} />
 
 
+        <Route element={<ProtectedRoute />}>
           <Route path="/home" element={<Home />} />
           <Route path="/explorar" element={<Explorar />} />
           <Route path="/perfil" element={<Perfil />} />
-          <Route path="/artistas" element={<Artistas />} />
           <Route path="/salvos" element={<Salvos />} />
           <Route path="/criarpost" element={<Criarpost />} />
           <Route path="/musica" element={<Musica />} />
           <Route path="/musica/:id" element={<Musica />} />
-          <Route path="/configuracoes" element={<Configuracoes/>} />
+          <Route path="/artista/:id" element={<Artista />} />
+          <Route path="/post/:id" element={<Post />} />
+          <Route path="/configuracoes" element={<Configuracoes />} />
+          <Route path="/buscar" element={<Resultados />} />
+        </Route>
 
       </Routes>
     </BrowserRouter>

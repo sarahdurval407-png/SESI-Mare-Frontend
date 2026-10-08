@@ -2,8 +2,10 @@ import { Heart, MessageCircle } from "lucide-react";
 import MusicCard from "./musicCard";
 import calcularTempo from "../calcularTempo";
 import fotoPadrao from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 
 interface PostCardProps {
+  postId?: number;
   name: string;
   username: string;
   foto?: string | null;
@@ -24,6 +26,7 @@ interface PostCardProps {
 }
 
 export default function PostCard({
+  postId,
   name,
   username,
   foto,
@@ -39,8 +42,22 @@ export default function PostCard({
   comments,
   avaliacoes,
 }: PostCardProps) {
+
+  const navigate = useNavigate();
+
   return (
-    <article className="border border-[#354052] bg-[#111420] rounded-lg p-4">
+    <article
+      onClick={(event) => {
+        const alvo = event.target as HTMLElement;
+
+        if (alvo.closest("a, button")) return;
+
+        if (postId !== undefined) {
+          navigate(`/post/${postId}`);
+        }
+      }}
+      className="cursor-pointer rounded-lg border border-[#354052] bg-[#111420] p-4"
+    >
       {/* Usuário */}
       <div className="flex items-center gap-3 mb-3">
         <img
@@ -86,9 +103,15 @@ export default function PostCard({
           </button>
 
           {/* Comentários */}
-          <button className="flex items-center gap-1.5 cursor-pointer">
+          <button
+            onClick={() => {
+              if (postId !== undefined) {
+                navigate(`/post/${postId}`);
+              }
+            }}
+            className="flex items-center gap-1.5 cursor-pointer"
+          >
             <MessageCircle size={16} />
-
             <span className="text-[12px]">{comments ?? 0}</span>
           </button>
         </div>

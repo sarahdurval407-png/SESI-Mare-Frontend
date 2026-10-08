@@ -5,6 +5,7 @@ import PageContent from "../components/pageContent";
 import SearchBar from "../components/searchbar";
 import MusicCard from "../components/musicCard";
 import RecommendedMusic from "../components/recommendedMusic";
+import { API_URL } from "../api";
 
 export default function Salvos() {
   const [musicas, setMusicas] = useState<any[]>([]);
@@ -21,13 +22,13 @@ export default function Salvos() {
         }
 
         const [respostaSalvos, respostaMusicas] = await Promise.all([
-          fetch("http://localhost:3000/usuarios/me/salvos", {
+          fetch(`${API_URL}/usuarios/me/salvos`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }),
 
-          fetch("http://localhost:3000/musicas"),
+          fetch(`${API_URL}/musicas`),
         ]);
 
         if (!respostaSalvos.ok || !respostaMusicas.ok) {
