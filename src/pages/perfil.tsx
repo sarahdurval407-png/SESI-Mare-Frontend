@@ -49,6 +49,7 @@ export default function Perfil() {
   const [usernameEditado, setUsernameEditado] = useState("");
   const [bioEditada, setBioEditada] = useState("");
   const [salvando, setSalvando] = useState(false);
+  const [musicas, setMusicas] = useState<any[]>([]);
 
   useEffect(() => {
     buscarPerfil();
@@ -271,7 +272,7 @@ export default function Perfil() {
               <button
                 type="button"
                 onClick={() => setEditando(false)}
-                className="text-gray-500 transition hover:text-white"
+                className="text-gray-500 transition cursor-pointer hover:text-white"
               >
                 ✕
               </button>
@@ -370,8 +371,8 @@ export default function Perfil() {
                   style={
                     usuario.capa
                       ? {
-                          backgroundImage: `url(${usuario.capa})`,
-                        }
+                        backgroundImage: `url(${usuario.capa})`,
+                      }
                       : undefined
                   }
                 >
@@ -471,11 +472,10 @@ export default function Perfil() {
                   <button
                     type="button"
                     onClick={() => setAba("avaliacoes")}
-                    className={`border-b-2 px-1 pb-3 font-serif text-[14px] transition cursor-pointer ${
-                      aba === "avaliacoes"
-                        ? "border-blue-400 text-white"
-                        : "border-transparent text-gray-500 hover:text-blue-400"
-                    }`}
+                    className={`border-b-2 px-1 pb-3 font-serif text-[14px] transition cursor-pointer ${aba === "avaliacoes"
+                      ? "border-blue-400 text-white"
+                      : "border-transparent text-gray-500 hover:text-blue-400"
+                      }`}
                   >
                     Últimas avaliações
                   </button>
@@ -483,11 +483,10 @@ export default function Perfil() {
                   <button
                     type="button"
                     onClick={() => setAba("comentarios")}
-                    className={`border-b-2 px-1 pb-3 font-serif text-[14px] transition cursor-pointer ${
-                      aba === "comentarios"
-                        ? "border-blue-400 text-white"
-                        : "border-transparent text-gray-500 hover:text-blue-400"
-                    }`}
+                    className={`border-b-2 px-1 pb-3 font-serif text-[14px] transition cursor-pointer ${aba === "comentarios"
+                      ? "border-blue-400 text-white"
+                      : "border-transparent text-gray-500 hover:text-blue-400"
+                      }`}
                   >
                     Comentários
                   </button>
@@ -495,11 +494,10 @@ export default function Perfil() {
                   <button
                     type="button"
                     onClick={() => setAba("salvos")}
-                    className={`border-b-2 px-1 pb-3 font-serif text-[14px] transition cursor-pointer ${
-                      aba === "salvos"
-                        ? "border-blue-400 text-white"
-                        : "border-transparent text-gray-500 hover:text-blue-400"
-                    }`}
+                    className={`border-b-2 px-1 pb-3 font-serif text-[14px] transition cursor-pointer ${aba === "salvos"
+                      ? "border-blue-400 text-white"
+                      : "border-transparent text-gray-500 hover:text-blue-400"
+                      }`}
                   >
                     Músicas salvas
                   </button>
@@ -527,6 +525,7 @@ export default function Perfil() {
                           time={post.dataCriacao}
                           content={post.texto}
                           nota={post.nota}
+                          musicId={post.musica?.id}
                           musicTitle={post.musica.titulo}
                           artist={post.musica.artista.nome}
                           likes={post._count.curtidas}
@@ -646,15 +645,29 @@ export default function Perfil() {
 
             {/* RECOMENDAÇÕES */}
             <aside className="hidden xl:block">
-              <div className="sticky top-40">
+              <div className="fixed top-2/5 -translate-y-2/5 w-[340px]">
                 <h2 className="mb-5 font-serif text-[16px] text-white">
                   Músicas recomendadas
                 </h2>
 
                 <div className="flex flex-col gap-3">
-                  <RecommendedMusic titulo="Lembrança" artist="Ayla" />
-
-                  <RecommendedMusic titulo="Super Power Girl" artist="Kira" />
+                  {musicas.length > 0 ? (
+                    musicas
+                      .slice(0, 5)
+                      .map((musica) => (
+                        <RecommendedMusic
+                          id={musica.id}
+                          key={musica.id}
+                          titulo={musica.titulo}
+                          artist={musica.artista.nome}
+                          capa={musica.capa}
+                        />
+                      ))
+                  ) : (
+                    <p className="py-8 text-center text-[14px] text-[#697386]">
+                      Nenhuma música recomendada.
+                    </p>
+                  )}
                 </div>
               </div>
             </aside>

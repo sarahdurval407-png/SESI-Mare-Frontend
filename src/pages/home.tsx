@@ -67,13 +67,15 @@ export default function Home() {
                     foto={post.usuario?.foto}
                     time={post.dataCriacao}
                     content={post.texto}
+                    musicId={post.musica?.id}
                     musicTitle={post.musica?.titulo}
                     artist={post.musica?.artista?.nome}
                     musicCover={post.musica?.capa}
-                    nota={post.nota}
+                    nota={post.musica?.nota}
                     avaliacoes={post.musica?.avaliacoes}
                     likes={post._count?.curtidas}
                     comments={post._count?.comentarios}
+                    duracaoSegundos={post.musica?.duracaoSegundos}
                   />
                 ))
               ) : (
@@ -86,7 +88,7 @@ export default function Home() {
 
           {/* RECOMENDAÇÕES */}
           <aside className="hidden xl:block">
-            <div className="fixed top-2/5 -translate-y-1/2 w-[340px]">
+            <div className="fixed top-2/5 -translate-y-2/5 w-[340px]">
               <h2 className="mb-5 font-serif text-[16px] text-white">
                 Músicas recomendadas
               </h2>
@@ -97,6 +99,7 @@ export default function Home() {
                     .slice(0, 5)
                     .map((musica) => (
                       <RecommendedMusic
+                        id={musica.id}
                         key={musica.id}
                         titulo={musica.titulo}
                         artist={musica.artista.nome}

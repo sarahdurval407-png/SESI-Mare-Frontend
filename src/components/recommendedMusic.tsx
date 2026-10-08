@@ -1,16 +1,25 @@
+import { useNavigate } from "react-router-dom";
+
 interface RecommendedMusicProps {
+  id: number;
   titulo: string;
   artist: string;
   capa?: string | null;
 }
 
 export default function RecommendedMusic({
+  id,
   titulo,
   artist,
   capa,
 }: RecommendedMusicProps) {
+  const navigate = useNavigate();
+  
   return (
-    <div className="w-full rounded-lg border border-[#354052] bg-[#111420] p-3">
+    <div
+      onClick={() => id && navigate(`/musica/${id}`)}
+      className="w-full rounded-lg border border-[#354052] bg-[#111420] p-3 cursor-pointer"
+    >
       <div className="flex items-center gap-3">
         {/* Capa */}
         <img

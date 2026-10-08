@@ -5,11 +5,12 @@ import PageContent from "../components/pageContent";
 import SearchBar from "../components/searchbar";
 import OuvirCard from "../components/ouvirCard";
 
+
 import { MagnifyingGlassIcon, PlusIcon } from "@phosphor-icons/react";
 
 import MusicCard from "../components/musicCard";
 import { StarIcon } from "@phosphor-icons/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
 interface Musica {
@@ -30,6 +31,9 @@ export default function CriarPost() {
   const [musicas, setMusicas] = useState<Musica[]>([]);
   const [busca, setBusca] = useState("");
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const musicaId = searchParams.get("musica");
 
   const [musicaSelecionada, setMusicaSelecionada] = useState<Musica | null>(
     null,
@@ -53,13 +57,24 @@ export default function CriarPost() {
         const dados = await resposta.json();
 
         setMusicas(dados);
+
+        // Seleciona automaticamente a música enviada pela URL
+        if (musicaId) {
+          const musica = dados.find(
+            (item: Musica) => item.id === Number(musicaId)
+          );
+
+          if (musica) {
+            setMusicaSelecionada(musica);
+          }
+        }
       } catch (error) {
         console.error("Erro ao buscar músicas:", error);
       }
     }
 
     buscarMusicas();
-  }, []);
+  }, [musicaId]);
 
   // FILTRAR MÚSICAS
   const musicasFiltradas = musicas.filter((musica) => {
@@ -185,7 +200,7 @@ export default function CriarPost() {
         <div className="grid grid-cols-1 gap-10 xl:grid-cols-[minmax(0,1fr)_340px]">
           {/* PRINCIPAL */}
           <main className="min-w-0">
-              <SearchBar />
+            <SearchBar />
 
             {/* Título */}
             <h1 className="mt-5 font-serif text-[26px] text-white">
@@ -361,7 +376,7 @@ export default function CriarPost() {
 
           {/* DIREITA */}
           <aside className="xl:block">
-            <div className="sticky top-40">
+            <div className="fixed top-2/5 -translate-y-2/5 w-[340px]">
               {/* NOTA */}
               <h2 className="mb-2 font-serif text-[18px] text-white">
                 Sua nota

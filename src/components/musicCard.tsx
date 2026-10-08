@@ -7,8 +7,11 @@ import {
 
 import logo from "../assets/logo.png";
 import { StarIcon } from "@phosphor-icons/react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 type MusicCardProps = {
+  id?: number;
   tipo: "banner" | "quadrado" | "post";
   titulo?: string;
   artista?: string;
@@ -16,9 +19,11 @@ type MusicCardProps = {
   nota?: number;
   avaliacoes?: number;
   duracaoSegundos?: number;
+  onRemover?: () => void;
 };
 
 export default function MusicCard({
+  id,
   tipo,
   titulo = "Nome da música",
   artista = "Nome do artista",
@@ -26,6 +31,7 @@ export default function MusicCard({
   nota = 0,
   avaliacoes = 0,
   duracaoSegundos = 0,
+  onRemover,
 }: MusicCardProps) {
   function formatarDuracao(segundos: number) {
     const minutos = Math.floor(segundos / 60);
@@ -34,13 +40,96 @@ export default function MusicCard({
     return `${minutos}:${segundosRestantes.toString().padStart(2, "0")}`;
   }
 
+  const navigate = useNavigate();
+
+  const [salva, setSalva] = useState(false);
+  const [salvando, setSalvando] = useState(false);
+
+  useEffect(() => {
+    if (!id) return;
+
+    async function verificarSalvamento() {
+      try {
+        const token = localStorage.getItem("token");
+
+        if (!token) return;
+
+        const resposta = await fetch(
+          "http://localhost:3000/usuarios/me/salvos",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!resposta.ok) return;
+
+        const salvos = await resposta.json();
+
+        const estaSalva = salvos.some(
+          (item: any) => item.musica?.id === id
+        );
+
+        setSalva(estaSalva);
+      } catch (error) {
+        console.error("Erro ao verificar música salva:", error);
+      }
+    }
+
+    verificarSalvamento();
+  }, [id]);
+
+  async function alternarSalvamento(e: React.MouseEvent) {
+    e.stopPropagation();
+
+    if (!id || salvando) return;
+
+    try {
+      setSalvando(true);
+
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        console.error("Usuário não autenticado");
+        return;
+      }
+
+      const resposta = await fetch(
+        `http://localhost:3000/musicas/${id}/salvar`,
+        {
+          method: salva ? "DELETE" : "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!resposta.ok) {
+        throw new Error("Erro ao alterar salvamento");
+      }
+
+      setSalva(!salva);
+
+      if (salva) {
+        onRemover?.();
+      }
+    } catch (error) {
+      console.error("Erro ao salvar/remover música:", error);
+    } finally {
+      setSalvando(false);
+    }
+  }
+
   // =========================
   // CARD BANNER
   // =========================
 
   if (tipo === "banner") {
     return (
-      <div className="w-[320px] h-[160px] shrink-0 rounded-lg overflow-hidden border border-[#354052] bg-[#111420]">
+      <div
+        onClick={() => id && navigate(`/musica/${id}`)}
+        className="w-[320px] h-[160px] shrink-0 cursor-pointer rounded-lg overflow-hidden border border-[#354052] bg-[#111420]">
         <div className="relative w-full h-full">
           {/* Imagem */}
           <img
@@ -107,7 +196,9 @@ export default function MusicCard({
 
   if (tipo === "quadrado") {
     return (
-      <div className="w-[140px] shrink-0 border border-[#354052] rounded-lg p-2 bg-[#111420]">
+      <div
+        onClick={() => id && navigate(`/musica/${id}`)}
+        className="w-[140px] shrink-0 border border-[#354052] rounded-lg p-2 bg-[#111420] cursor-pointer">
         <img
           src={capa || logo}
           alt={titulo}
@@ -132,7 +223,9 @@ export default function MusicCard({
   // =========================
 
   return (
-    <div className="bg-[#111420] border border-[#354052] rounded-lg p-3 w-full">
+    <div
+      onClick={() => id && navigate(`/musica/${id}`)}
+      className="bg-[#111420] border border-[#354052] rounded-lg p-3 w-full cursor-pointer">
       {/* Parte principal */}
       <div className="flex items-center w-full">
         {/* Capa */}
@@ -190,14 +283,28 @@ export default function MusicCard({
       {/* Parte inferior */}
       <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#354052]">
         {/* Salvo */}
-        <div className="flex items-center">
+        <button
+          onClick={alternarSalvamento}
+          disabled={salvando}
+          className="flex items-center cursor-pointer"
+        >
           <BookmarkSimpleIcon
             size={17}
-            className="fill-[#58AAF0] text-[#58AAF0]"
+            weight={salva ? "fill" : "regular"}
+            className={
+              salva
+                ? "text-[#58AAF0] fill-[#58AAF0]"
+                : "text-[#687386]"
+            }
           />
 
-          <span className="text-[#58AAF0] text-[11px] ml-1">Salva</span>
-        </div>
+          <span
+            className={`text-[11px] ml-1 ${salva ? "text-[#58AAF0]" : "text-[#687386]"
+              }`}
+          >
+            {salva ? "Salva" : "Salvar"}
+          </span>
+        </button>
 
         {/* Mais opções */}
         <button className="text-[#D0D0D5] cursor-pointer">

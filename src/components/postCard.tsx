@@ -12,9 +12,11 @@ interface PostCardProps {
   content: string;
   nota?: number;
 
+  musicId: number;
   musicTitle: string;
   artist: string;
   musicCover?: string | null;
+  duracaoSegundos?: number;
 
   likes?: number;
   comments?: number;
@@ -28,9 +30,11 @@ export default function PostCard({
   time,
   content,
   nota,
+  musicId,
   musicTitle,
   musicCover,
   artist,
+  duracaoSegundos,
   likes,
   comments,
   avaliacoes,
@@ -61,12 +65,14 @@ export default function PostCard({
 
       {/* Música */}
       <MusicCard
+        id={musicId}
         tipo="post"
         titulo={musicTitle}
         artista={artist}
         capa={musicCover}
         nota={nota}
         avaliacoes={avaliacoes}
+        duracaoSegundos={duracaoSegundos}
       />
 
       {/* Ações */}

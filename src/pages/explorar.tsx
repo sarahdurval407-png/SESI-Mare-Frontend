@@ -78,6 +78,7 @@ export default function Explorar() {
           <div className="flex gap-4 overflow-x-hidden pb-3">
             {musicasEmAlta.map((musica) => (
               <MusicCard
+                id={musica.id}
                 key={musica.id}
                 tipo="banner"
                 titulo={musica.titulo}
@@ -107,6 +108,7 @@ export default function Explorar() {
           <div className="flex gap-4 overflow-x-auto pb-3">
             {musicasMaisBemAvaliadas.map((musica) => (
               <MusicCard
+                id={musica.id}
                 key={musica.id}
                 tipo="quadrado"
                 titulo={musica.titulo}
@@ -136,6 +138,7 @@ export default function Explorar() {
           <div className="flex gap-4 overflow-x-auto pb-3">
             {musicasRecomendadas.map((musica) => (
               <MusicCard
+                id={musica.id}
                 key={musica.id}
                 tipo="quadrado"
                 titulo={musica.titulo}

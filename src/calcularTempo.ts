@@ -18,10 +18,10 @@ export default function calcularTempo(data: string) {
   const horas = Math.floor(minutos / 60);
 
   if (horas < 24) {
-    return `${horas}horas`;
+    return `${horas} horas`;
   }
 
   const dias = Math.floor(horas / 24);
 
-  return `${dias}dias`;
+  return `${dias} dias`;
 }
